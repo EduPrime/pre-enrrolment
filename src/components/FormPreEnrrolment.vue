@@ -50,9 +50,9 @@
  
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue';
-import { IonList, IonItem, IonInput, IonSelect, IonSelectOption, IonButton } from '@ionic/vue';
+import { IonItem, IonInput, IonSelect, IonSelectOption, IonButton } from '@ionic/vue';
 
 const studentName = ref('');
 const studentAge = ref('');

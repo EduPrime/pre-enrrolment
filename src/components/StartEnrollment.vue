@@ -40,7 +40,7 @@
                     <ion-grid style="padding: 0;" >
                         <ion-row>
                             <ion-col style="padding: 0;" size="12">
-                                    <formEnrollment />
+                                    <formPreEnrrolment />
 
                             </ion-col>
 
@@ -60,7 +60,7 @@ import { IonSpinner } from '@ionic/vue';
 import selectSeriesSlider from '@/components/SelectSeriesSlider.vue';
 import selectCourseSlider from '@/components/SelectCourseSlider.vue';
 import selectSchoolSlider from '@/components/SelectSchoolSlider.vue';
-import formEnrollment from '@/components/FormEnrollment.vue'
+import formPreEnrrolment from '@/components/FormPreEnrrolment.vue'
 
 import { IonIcon } from '@ionic/vue';
 import { checkmarkCircleOutline, arrowBackOutline } from 'ionicons/icons';

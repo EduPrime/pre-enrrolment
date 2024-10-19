@@ -1,13 +1,13 @@
 <template>
+        <!-- @swiper="onSwiper" 
+        @slideChange="onSlideChange" -->
     <div 
     :style="pageWidth?.pageWidth > 992 ? 'max-width: 992px' : 'width: 100vw;'">
      <swiper
          :modules="modules" 
          :slides-per-view="pageWidth?.pageWidth > 992 ? 2 : 1.4" 
          :space-between="5" 
-         :scrollbar="{ draggable: true }"
-         @swiper="onSwiper" 
-         @slideChange="onSlideChange">
+         :scrollbar="{ draggable: true }">
              <swiper-slide 
                  v-for="series in boundledSeries" 
                  :key="series">
@@ -47,13 +47,13 @@
  import 'swiper/css/pagination';
  import 'swiper/css/scrollbar';
  
- const onSwiper = (swiper) => {
-     console.log(swiper);
- };
+//  const onSwiper = (swiper) => {
+//      console.log(swiper);
+//  };
  
- const onSlideChange = () => {
-     console.log('slide change');
- };
+//  const onSlideChange = () => {
+//      console.log('slide change');
+//  };
  
  const modules = [Navigation, Pagination, Scrollbar, A11y];
  
