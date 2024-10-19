@@ -32,44 +32,7 @@
                                         </ion-text>
                                     </ion-col>
                                     <ion-col size="12">
-                                        <div style="display: flex; zoom: 0.70; margin-left: -6px;">
-                                            <ion-card style="width: 75px;">
-                                                <ion-card-header>
-                                                    <ion-card-title
-                                                        class="ion-text-center ion-font-weight-bold card-time-title">03</ion-card-title>
-                                                </ion-card-header>
-                                                <ion-card-content class="card-time-subtitle ion-text-center">
-                                                    <ion-label class="">Meses</ion-label>
-                                                </ion-card-content>
-                                            </ion-card>
-                                            <ion-card style="width: 75px;">
-                                                <ion-card-header>
-                                                    <ion-card-title
-                                                        class="ion-text-center ion-font-weight-bold card-time-title">15</ion-card-title>
-                                                </ion-card-header>
-                                                <ion-card-content class="card-time-subtitle ion-text-center">
-                                                    <ion-label class="ion-text-center">Dias</ion-label>
-                                                </ion-card-content>
-                                            </ion-card>
-                                            <ion-card style="width: 75px;">
-                                                <ion-card-header>
-                                                    <ion-card-title
-                                                        class="ion-text-center ion-font-weight-bold card-time-title">08</ion-card-title>
-                                                </ion-card-header>
-                                                <ion-card-content class="card-time-subtitle ion-text-center">
-                                                    <ion-label class="ion-text-center">Horas</ion-label>
-                                                </ion-card-content>
-                                            </ion-card>
-                                            <ion-card style="width: 75px;">
-                                                <ion-card-header>
-                                                    <ion-card-title
-                                                        class="ion-text-center ion-font-weight-bold card-time-title">53</ion-card-title>
-                                                </ion-card-header>
-                                                <ion-card-content class="card-time-subtitle ion-text-center">
-                                                    <ion-label class="ion-text-center">Min</ion-label>
-                                                </ion-card-content>
-                                            </ion-card>
-                                        </div>
+                                        <remainingTime />
                                     </ion-col>
                                     <ion-col size="12">
                                         <ion-text color="primary">
@@ -135,7 +98,7 @@
                     <div class="ion-padding-bottom ion-padding-top">
                         <trackEnrollment />
                         <div class="ion-padding-bottom ion-padding-top">
-                            <ion-button expand="full"  href="/inicio#block2">Começar Agora</ion-button>
+                            <ion-button expand="full" href="/inicio#block2">Começar Agora</ion-button>
                             <ion-button expand="full" color="tertiary">Acompanhar
                                 Pré-Matrícula</ion-button>
                         </div>
@@ -154,12 +117,12 @@
 
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
-import { useRouter } from 'vue-router';
+// import { useRouter } from 'vue-router';
 import startEnrollment from '@/components/StartEnrollment.vue';
 import trackEnrollment from '@/components/TrackEnrollment.vue';
 import appFooter from '@/components/AppFooter.vue';
 import { catchPageWidth } from '@/utils/useUtils';
-
+import remainingTime from '@/components/RemainingTime.vue'
 const etapa = ref(1)
 const pageWidth = ref()
 // const router = useRouter()
@@ -170,7 +133,7 @@ const queryBlock2 = ref()
 //     router.push('/details');
 // };
 
- 
+
 
 function handleInput(event: { target: { value: string; }; }) {
     const query = event.target.value.toLowerCase();
@@ -205,20 +168,6 @@ h1 {
     margin-top: 20px;
     font-size: 1.8rem;
     font-weight: bolder;
-}
-
-.card-time-title {
-    font-size: 1.8rem;
-    font-weight: 900;
-    margin-bottom: -5px;
-    color: #EE7889;
-}
-
-.card-time-subtitle {
-    font-size: 1rem;
-    margin-top: -5px;
-    font-weight: lighter;
-    color: #EE7889;
 }
 
 .dark-background-title {
