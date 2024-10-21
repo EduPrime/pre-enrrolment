@@ -38,6 +38,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, watch } from 'vue';
+import { IonCard, IonCardHeader, IonLabel, IonCardContent, IonCardTitle} from '@ionic/vue';
 
 const targetDate = new Date('2024-12-31T23:59:59'); // Defina a data alvo aqui
 

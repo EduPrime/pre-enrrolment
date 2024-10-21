@@ -35,6 +35,8 @@
  import useSupabase from '@/composables/useSupabase';
  import { catchPageWidth } from '@/utils/useUtils';
  import { defineEmits, ref, onMounted, defineProps } from 'vue';
+import { IonCard, IonCardHeader, IonText } from '@ionic/vue';
+
  // import Swiper core and required modules
  import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
  

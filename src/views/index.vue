@@ -117,7 +117,7 @@
 
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
-import { IonSearchbar } from '@ionic/vue';
+import { IonSearchbar, IonButton, IonContent, IonText, IonGrid, IonRow, IonCol, IonPage, IonHeader, IonToolbar } from '@ionic/vue';
 
 // import { useRouter } from 'vue-router';
 import startEnrollment from '@/components/StartEnrollment.vue';

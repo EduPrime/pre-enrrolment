@@ -58,7 +58,8 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
 import { catchPageWidth } from '@/utils/useUtils';
-import { IonIcon } from '@ionic/vue';
+import { IonIcon, IonButton,  IonText, IonCardSubtitle, IonCardTitle } from '@ionic/vue';
+
 import { mailOutline, logoWhatsapp, callOutline, logoInstagram, logoFacebook, globeOutline } from 'ionicons/icons';
 
 const pageWidth = ref()

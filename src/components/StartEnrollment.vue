@@ -55,7 +55,8 @@
 <script setup lang="ts">
 import { ref, watch, defineEmits, onMounted, defineProps } from 'vue';
 
-import { IonSpinner } from '@ionic/vue';
+import {IonSpinner, IonButton, IonGrid, IonRow, IonCol } from '@ionic/vue';
+
 
 import selectSeriesSlider from '@/components/SelectSeriesSlider.vue';
 import selectCourseSlider from '@/components/SelectCourseSlider.vue';

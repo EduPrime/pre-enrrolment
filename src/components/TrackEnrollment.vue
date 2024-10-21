@@ -55,3 +55,7 @@
       </ion-card-content>
    </ion-card>
 </template>
+<script setup lang="ts">
+import { IonCard, IonCardHeader, IonCardContent, IonCardTitle, IonItem, IonText, IonCardSubtitle } from '@ionic/vue';
+
+</script>
