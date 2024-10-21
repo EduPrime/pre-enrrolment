@@ -42,6 +42,8 @@
 
 </template>
 <script setup lang="ts">
+import { IonItem, IonText, IonCardContent, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle } from '@ionic/vue';
+
 import { defineEmits, onMounted, ref, watch } from 'vue';
 import {catchPageWidth} from '@/utils/useUtils';
 import useSupabase from '@/composables/useSupabase';

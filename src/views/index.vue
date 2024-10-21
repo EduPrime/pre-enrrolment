@@ -117,6 +117,8 @@
 
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
+import { IonSearchbar } from '@ionic/vue';
+
 // import { useRouter } from 'vue-router';
 import startEnrollment from '@/components/StartEnrollment.vue';
 import trackEnrollment from '@/components/TrackEnrollment.vue';
@@ -135,7 +137,7 @@ const queryBlock2 = ref()
 
 
 
-function handleInput(event: { target: { value: string; }; }) {
+function handleInput(event: { target: any }) {
     const query = event.target.value.toLowerCase();
     queryBlock2.value = query
 }
