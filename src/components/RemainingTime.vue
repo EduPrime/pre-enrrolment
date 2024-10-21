@@ -1,44 +1,35 @@
 <template>
-  <div style="display: flex; zoom: 0.70; margin-left: -6px;">
-    <ion-card style="width: 80px;">
-      <ion-card-header>
-        <ion-card-title :class="animateClass" class="ion-text-center ion-font-weight-bold card-time-title">{{ months }}</ion-card-title>
-      </ion-card-header>
-      <ion-card-content class="card-time-subtitle ion-text-center">
-        <ion-label class="">Meses</ion-label>
-      </ion-card-content>
-    </ion-card>
-    <ion-card style="width: 80px;">
-      <ion-card-header>
-        <ion-card-title :class="animateClass" class="ion-text-center ion-font-weight-bold card-time-title">{{ days }}</ion-card-title>
-      </ion-card-header>
-      <ion-card-content class="card-time-subtitle ion-text-center">
-        <ion-label class="ion-text-center">Dias</ion-label>
-      </ion-card-content>
-    </ion-card>
-    <ion-card style="width: 80px;">
-      <ion-card-header>
-        <ion-card-title :class="animateClass" class="ion-text-center ion-font-weight-bold card-time-title">{{ hours }}</ion-card-title>
-      </ion-card-header>
-      <ion-card-content class="card-time-subtitle ion-text-center">
-        <ion-label class="ion-text-center">Horas
-          </ion-label>
-        </ion-card-content>
-    </ion-card>
-    <ion-card style="width: 80px;">
-      <ion-card-header>
-        <ion-card-title :class="animateClass" class="ion-text-center ion-font-weight-bold card-time-title">{{ minutes }}</ion-card-title>
-      </ion-card-header>
-      <ion-card-content class="card-time-subtitle ion-text-center">
-        <ion-label class="ion-text-center">Min</ion-label>
-      </ion-card-content>
-    </ion-card>
+  <div style="display: flex;">
+    <div class="card-remaining-time">
+      <div :class="animateClass" class="ion-text-center ion-font-weight-bold card-time-title">{{ months }}</div>
+      <p class="card-time-subtitle ion-text-center">
+        <span class="">Meses</span>
+      </p>
+    </div>
+    <div class="card-remaining-time">
+      <div :class="animateClass" class="ion-text-center ion-font-weight-bold card-time-title">{{ days }}</div>
+      <p class="card-time-subtitle ion-text-center">
+        <span class="ion-text-center">Dias</span>
+      </p>
+    </div>
+    <div class="card-remaining-time">
+      <div :class="animateClass" class="ion-text-center ion-font-weight-bold card-time-title">{{ hours }}</div>
+      <p class="card-time-subtitle ion-text-center">
+        <span class="ion-text-center">Horas
+        </span>
+      </p>
+    </div>
+    <div class="card-remaining-time">
+      <div :class="animateClass" class="ion-text-center ion-font-weight-bold card-time-title">{{ minutes }}</div>
+      <p class="card-time-subtitle ion-text-center">
+        <span class="ion-text-center">Min</span>
+      </p>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, watch } from 'vue';
-import { IonCard, IonCardHeader, IonLabel, IonCardContent, IonCardTitle} from '@ionic/vue';
 
 const targetDate = new Date('2024-12-31T23:59:59'); // Defina a data alvo aqui
 
@@ -96,27 +87,38 @@ watch([months, days, hours, minutes], () => {
     opacity: 0;
     transform: translateY(-10px);
   }
+
   50% {
     opacity: 1;
     transform: translateY(0);
   }
+
   100% {
     opacity: 0;
     transform: translateY(10px);
   }
-  }
+}
 
-  .card-time-title {
-    font-size: 1.8rem;
-    font-weight: 900;
-    margin-bottom: -5px;
-    color: #EE7889;
+.card-time-title {
+  font-size: 1.4rem;
+  font-weight: 900;
+  margin-bottom: -10px;
+  color: #EE7889;
 }
 
 .card-time-subtitle {
-    font-size: 1rem;
-    margin-top: -5px;
-    font-weight: lighter;
-    color: #EE7889;
+  font-size: 0.7rem;
+  font-weight: lighter;
+  color: #EE7889;
+}
+
+.card-remaining-time {
+  width: 55px;
+  background-color: white;
+  padding-top: 5px;
+  padding-bottom: 3px;
+  border-radius: 0.3rem;
+  margin-right: 10px;
+  box-shadow: rgba(0, 0, 0, 0.137) 0px 0px 5px;
 }
 </style>
