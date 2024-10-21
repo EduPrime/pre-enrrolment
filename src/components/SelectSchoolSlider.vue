@@ -1,5 +1,4 @@
 <template>
-  
   <div :style="pageWidth?.pageWidth > 992 ? 'max-width: 992px' : 'width: 100vw;'">
 
   <!-- @swiper="onSwiper" @slideChange="onSlideChange" -->
@@ -8,7 +7,6 @@
     <swiper-slide v-for="school in schoolList" :key="school.id"  @click="emits('update:modelValue', school)">
       <ion-card style="min-height: 100%;" :style="schoolList?.length === 1? '' : 'width: 100%;'">
 
-      
           <ion-card-header class="ion-padding-top">
             <ion-card-title style="font-size: 1.2rem; line-height: 110%;">{{ school.name }}</ion-card-title>
             <ion-card-subtitle>{{ school.address }}, {{ school.city }} - {{ school.state }}</ion-card-subtitle>

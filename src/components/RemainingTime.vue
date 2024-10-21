@@ -1,6 +1,6 @@
 <template>
   <div style="display: flex; zoom: 0.70; margin-left: -6px;">
-    <ion-card style="width: 75px;">
+    <ion-card style="width: 80px;">
       <ion-card-header>
         <ion-card-title :class="animateClass" class="ion-text-center ion-font-weight-bold card-time-title">{{ months }}</ion-card-title>
       </ion-card-header>
@@ -8,7 +8,7 @@
         <ion-label class="">Meses</ion-label>
       </ion-card-content>
     </ion-card>
-    <ion-card style="width: 75px;">
+    <ion-card style="width: 80px;">
       <ion-card-header>
         <ion-card-title :class="animateClass" class="ion-text-center ion-font-weight-bold card-time-title">{{ days }}</ion-card-title>
       </ion-card-header>
@@ -16,7 +16,7 @@
         <ion-label class="ion-text-center">Dias</ion-label>
       </ion-card-content>
     </ion-card>
-    <ion-card style="width: 75px;">
+    <ion-card style="width: 80px;">
       <ion-card-header>
         <ion-card-title :class="animateClass" class="ion-text-center ion-font-weight-bold card-time-title">{{ hours }}</ion-card-title>
       </ion-card-header>
@@ -25,7 +25,7 @@
           </ion-label>
         </ion-card-content>
     </ion-card>
-    <ion-card style="width: 75px;">
+    <ion-card style="width: 80px;">
       <ion-card-header>
         <ion-card-title :class="animateClass" class="ion-text-center ion-font-weight-bold card-time-title">{{ minutes }}</ion-card-title>
       </ion-card-header>
