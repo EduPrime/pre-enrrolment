@@ -114,4 +114,39 @@ export default class UseSupabase {
     }
   }
 
+
+  async getStudents() {
+    try {
+      const { data, error } = await this.supabase
+        .from('student')
+        .select('*');
+
+      if (error) {
+        console.error(error);
+        return void 0;
+      } else {
+        return data;
+      }
+    } catch (error: unknown | any) {
+      throw new Error(error);
+    }
+  }
+
+  async insertStudent(student: { name: any; birthdate: any; phone: any }) {
+    try {
+        const { data, error } = await this.supabase
+            .from('student')
+            .insert([student]);
+
+        if (error) {
+            console.error(error);
+            return void 0;
+        } else {
+            return data;
+        }
+    } catch (error: unknown | any) {
+        throw new Error(error);
+    }
+}
+
 }

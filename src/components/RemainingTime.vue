@@ -115,7 +115,7 @@ watch([months, days, hours, minutes], () => {
 .card-remaining-time {
   width: 55px;
   background-color: white;
-  padding-top: 5px;
+  padding-top: 8px;
   padding-bottom: 3px;
   border-radius: 0.3rem;
   margin-right: 10px;
