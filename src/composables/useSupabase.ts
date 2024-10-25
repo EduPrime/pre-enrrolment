@@ -134,18 +134,14 @@ export default class UseSupabase {
 
   async insertStudent(student: { name: any; birthdate: any; phone: any }) {
     try {
-        const { data, error } = await this.supabase
+        const data = await this.supabase
             .from('student')
             .insert([student]);
-
-        if (error) {
-            console.error(error);
-            return void 0;
-        } else {
             return data;
-        }
     } catch (error: unknown | any) {
-        throw new Error(error);
+        
+       console.error(error)
+        return error.status
     }
 }
 
