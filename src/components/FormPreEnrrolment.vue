@@ -1,6 +1,6 @@
 <template>
  
-  <ion-grid v-if="finished" class="ion-padding">
+  <ion-grid v-if="!finished" class="ion-padding-horizontal">
     <ion-row v-if="!next">
       <ion-col size="12">
         <ion-item>
@@ -180,7 +180,7 @@
     </ion-row>
   </ion-grid>
 
-  <ion-grid v-else class="ion-padding">
+  <ion-grid v-else class="ion-padding-horizontal">
     <ion-row>
       <ion-col size="12">
        <ion-card>
