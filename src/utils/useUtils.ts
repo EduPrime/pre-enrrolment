@@ -1,9 +1,8 @@
-export const catchPageWidth = () => {
-    const pageWidth = window.innerWidth;
-
+export function catchPageWidth() {
+    const pageWidth = window.innerWidth
+  
     return {
-        pageWidth
-    };
-};
-
-
+      pageWidth,
+    }
+  }
+  

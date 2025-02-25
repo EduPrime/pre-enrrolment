@@ -1,77 +1,91 @@
+<script setup lang="ts">
+import { onMounted, onUnmounted, ref, watch } from 'vue'
+
+interface Props {
+  tDate: string
+}
+
+const props = defineProps<Props>()
+
+const targetDate = new Date(props.tDate) // Defina a data alvo aqui
+
+const months = ref(0)
+const days = ref(0)
+const hours = ref(0)
+const minutes = ref(0)
+const animateClass = ref('')
+
+function updateCountdown() {
+  const now = new Date()
+  const timeDifference = targetDate.getTime() - now.getTime()
+
+  const totalMinutes = Math.floor(timeDifference / (1000 * 60))
+  const totalHours = Math.floor(totalMinutes / 60)
+  const totalDays = Math.floor(totalHours / 24)
+  const totalMonths = Math.floor(totalDays / 30)
+
+  months.value = totalMonths
+  days.value = totalDays % 30
+  hours.value = totalHours % 24
+  minutes.value = totalMinutes % 60
+}
+
+let intervalId: ReturnType<typeof setInterval>
+
+onMounted(() => {
+  updateCountdown()
+  intervalId = setInterval(updateCountdown, 60000) // Atualiza a cada minuto
+})
+
+onUnmounted(() => {
+  clearInterval(intervalId)
+})
+
+watch([months, days, hours, minutes], () => {
+  animateClass.value = 'animate'
+  setTimeout(() => {
+    animateClass.value = ''
+  }, 500) // Duração da animação
+})
+</script>
+
 <template>
   <div style="display: flex;">
     <div class="card-remaining-time">
-      <div :class="animateClass" class="ion-text-center ion-font-weight-bold card-time-title">{{ months }}</div>
+      <div :class="animateClass" class="ion-text-center ion-font-weight-bold card-time-title">
+        {{ months }}
+      </div>
       <p class="card-time-subtitle ion-text-center">
         <span class="">Meses</span>
       </p>
     </div>
     <div class="card-remaining-time">
-      <div :class="animateClass" class="ion-text-center ion-font-weight-bold card-time-title">{{ days }}</div>
+      <div :class="animateClass" class="ion-text-center ion-font-weight-bold card-time-title">
+        {{ days }}
+      </div>
       <p class="card-time-subtitle ion-text-center">
         <span class="ion-text-center">Dias</span>
       </p>
     </div>
     <div class="card-remaining-time">
-      <div :class="animateClass" class="ion-text-center ion-font-weight-bold card-time-title">{{ hours }}</div>
+      <div :class="animateClass" class="ion-text-center ion-font-weight-bold card-time-title">
+        {{ hours }}
+      </div>
       <p class="card-time-subtitle ion-text-center">
         <span class="ion-text-center">Horas
         </span>
       </p>
     </div>
     <div class="card-remaining-time">
-      <div :class="animateClass" class="ion-text-center ion-font-weight-bold card-time-title">{{ minutes }}</div>
+      <div :class="animateClass" class="ion-text-center ion-font-weight-bold card-time-title">
+        {{ minutes }}
+      </div>
       <p class="card-time-subtitle ion-text-center">
         <span class="ion-text-center">Min</span>
       </p>
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import { ref, onMounted, onUnmounted, watch } from 'vue';
-
-const targetDate = new Date('2024-12-31T23:59:59'); // Defina a data alvo aqui
-
-const months = ref(0);
-const days = ref(0);
-const hours = ref(0);
-const minutes = ref(0);
-const animateClass = ref('');
-
-function updateCountdown() {
-  const now = new Date();
-  const timeDifference = targetDate.getTime() - now.getTime();
-
-  const totalMinutes = Math.floor(timeDifference / (1000 * 60));
-  const totalHours = Math.floor(totalMinutes / 60);
-  const totalDays = Math.floor(totalHours / 24);
-  const totalMonths = Math.floor(totalDays / 30);
-
-  months.value = totalMonths;
-  days.value = totalDays % 30;
-  hours.value = totalHours % 24;
-  minutes.value = totalMinutes % 60;
-}
-
-let intervalId: ReturnType<typeof setInterval>;
-
-onMounted(() => {
-  updateCountdown();
-  intervalId = setInterval(updateCountdown, 60000); // Atualiza a cada minuto
-});
-
-onUnmounted(() => {
-  clearInterval(intervalId);
-});
-
-watch([months, days, hours, minutes], () => {
-  animateClass.value = 'animate';
-  setTimeout(() => {
-    animateClass.value = '';
-  }, 500); // Duração da animação
-});
-</script>
 
 <style scoped>
 .card-time-title {
