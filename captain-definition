@@ -1,13 +1,13 @@
 {
   "schemaVersion": 2,
   "dockerfileLines": [
-    "FROM oven/bun:latest AS builder",
+    "FROM node:18 AS builder",  
     "WORKDIR /app",
-    "RUN apt-get update && apt-get install -y unzip",
-    "COPY . .",
-    "RUN bun install && bun run build",
-    "FROM nginx:alpine",
+    "COPY package*.json ./", 
+    "RUN npm install",  
+    "COPY . .",  
+    "RUN npm run build",  
+    "FROM nginx:alpine",  
     "COPY --from=builder /app/dist /usr/share/nginx/html"
-  ]
+  ] 
 }
-
