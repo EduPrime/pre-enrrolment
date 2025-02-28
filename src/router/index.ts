@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from '@ionic/vue-router';
+import { createRouter, createWebHistory, createMemoryHistory } from '@ionic/vue-router';
 import { RouteRecordRaw } from 'vue-router';
 import PreEnrollment from '../views/PreEnrollment.vue'
 
@@ -11,7 +11,7 @@ const routes: Array<RouteRecordRaw> = [
 
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.VITE_BASE_URL),
+  history: createMemoryHistory(import.meta.env.VITE_BASE_URL),
   routes
 })
 
