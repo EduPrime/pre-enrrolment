@@ -1,5 +1,10 @@
 {
   "schemaVersion": 2,
+  "envVars": {
+    "VITE_BASE_URL": "https://example.com",
+    "VITE_DATABASE_URL": "http://portal-preeenrollment.sirius.softagon.io",
+    "VITE_JWT_TOKEN": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoicG9ydGFsIiwiZXhwIjo5OTk5OTk5OTk5LCJpYXQiOjE3NDA0OTMwMTR9.NXgvknwwPqw7yskO8vQfzJbyaruxfJ225glG0FlHzTU"
+  }
   "dockerfileLines": [
     "FROM node:18 AS builder",  
     "WORKDIR /app",
