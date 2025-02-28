@@ -1,12 +1,12 @@
 {
   "schemaVersion": 2,
   "dockerfileLines": [
-    "FROM oven/bun:latest",
+    "FROM oven/bun:latest AS builder",  // Nomeando o primeiro estágio como 'builder'
     "WORKDIR /app",
     "RUN apt-get update && apt-get install -y unzip", 
     "COPY . .",
-    "RUN bun install && bun run build",
-    "FROM nginx:alpine",
-    "COPY --from=builder /app/dist /usr/share/nginx/html"
+    "RUN bun install && bun run build",  // Executando a instalação e build do Bun
+    "FROM nginx:alpine",  // Segundo estágio para servir os arquivos com Nginx
+    "COPY --from=builder /app/dist /usr/share/nginx/html"  // Copiando os arquivos da pasta dist para o Nginx
   ]
 }
