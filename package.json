@@ -27,12 +27,17 @@
     "@uppy/dashboard": "^4.1.1",
     "@uppy/tus": "^4.1.2",
     "@uppy/vue": "^2.0.1",
+    "ionic": "^5.4.16",
     "ionicons": "^7.0.0",
     "prisma": "^6.4.1",
     "swiper": "^11.1.14",
+    "validations-br": "^1.4.0",
+    "vee-validate": "^4.15.0",
     "vue": "^3.3.0",
     "vue-router": "^4.2.0",
-    "vue-the-mask": "^0.11.1"
+    "vue-the-mask": "^0.11.1",
+    "yup": "^1.6.1",
+    "yup-locale-pt": "^0.0.9"
   },
   "devDependencies": {
     "@capacitor/cli": "6.1.2",

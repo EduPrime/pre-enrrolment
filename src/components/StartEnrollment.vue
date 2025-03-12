@@ -217,6 +217,7 @@ onMounted(async () => {
           <selectCourseSlider v-model="selectedCourse" :school="selectedSchool?.id" />
         </div>
       </div>
+      <!-- Etapa 3 -->
       <div v-else-if="etapa === 3">
         <IonButton color="light" :class="pageWidth?.pageWidth < 992 ? 'ion-margin-start' : 'ion-margin-bottom'"
           @click="etapa = (etapa - 1)">

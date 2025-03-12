@@ -66,11 +66,11 @@ onMounted(async () => {
     <Swiper
       :modules="modules" :slides-per-view="pageWidth?.pageWidth > 992 ? 1.4 : 1" :space-between="5"
       :scrollbar="{ draggable: true }"
-      style="width: 100vw"
     >
       <SwiperSlide v-for="series in boundledSeries" :key="series">
         <div>
           <IonCard
+            class="series-card"
             v-for="serie in series.items" :key="serie"
             style=" margin-bottom: 25px; background-image: linear-gradient(to  right, var(--ion-color-tertiary) -50%, #fff 60%  );"
             @click="emits('update:modelValue', serie)"
@@ -90,6 +90,18 @@ onMounted(async () => {
     </Swiper>
   </div>
 </template>
+
+<style>
+
+.series-card{
+  cursor: pointer; 
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.series-card:hover{
+  transform: scale(1.02); 
+}
+</style>
 
 <!-- <script>
        // import Swiper core and required modules

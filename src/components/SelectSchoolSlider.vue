@@ -38,8 +38,9 @@ const postgrest = new SchoolService()
 const schoolList = ref()
 
 watch(() => props.query, async (qValue: string) => {
-  if (qValue && qValue.length > 2) {
-    schoolList.value = schoolList.value = await postgrest.searchSchools(qValue)
+  console.log('entrou aqui', qValue)
+  if (qValue && qValue.length > 0) {
+    schoolList.value = await postgrest.searchSchools(qValue)
     console.log('schoolList:', schoolList.value)
   }
   else {
@@ -63,7 +64,7 @@ onMounted(async () => {
       :space-between="20" :scrollbar="{ draggable: true }"
     >
       <SwiperSlide v-for="school in schoolList" :key="school.id" @click="emits('update:modelValue', school)">
-        <IonCard style="min-height: 100%;" :style="schoolList?.length === 1 ? '' : 'width: 100%;'">
+        <IonCard class="school-card" style="min-height: 100%;" :style="schoolList?.length === 1 ? '' : 'width: 100%;'">
           <IonCardHeader class="ion-padding-top">
             <IonCardTitle style="font-size: 1.2rem; line-height: 110%;">
               {{ school.name }}
@@ -83,12 +84,14 @@ onMounted(async () => {
 
             <IonItem>
               <div>
-                <p v-if="school.open">
-                  Matriculas abertas
-                </p>
-                <p v-else>
-                  Matriculas encerradas
-                </p>
+                <IonText color="primary" class="flex" style="width: 100%">
+                  <p v-if="school.open">
+                    Matriculas abertas
+                  </p>
+                  <p v-else>
+                    Matriculas encerradas
+                  </p>
+              </IonText>
               </div>
               <div
                 style="height: 16px; width: 16px; border-radius: 100%; margin-left: auto"
@@ -101,6 +104,26 @@ onMounted(async () => {
     </Swiper>
   </div>
 </template>
+
+<style>
+
+.school-card{
+  cursor: pointer; 
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.school-card:hover {
+  background-color: #f0f0f0; 
+  transform: scale(1.02); 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+}
+
+ion-item {
+  --background: transparent;
+  --ion-background-color: transparent;
+  --border-color: transparent; 
+}
+</style>
 
 <!-- <script>
     // import Swiper core and required modules
