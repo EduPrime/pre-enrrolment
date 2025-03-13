@@ -1,7 +1,10 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router';
-import './utils/yupConfig'
+import VueTheMask from 'vue-the-mask';
+import imaskDirective from '../src/utils/imasks';
+import './utils/validationRules'
+import './utils/veeValidateErrorMessagesConfig'
 
 import { IonicVue } from '@ionic/vue';
 
@@ -36,6 +39,8 @@ import '@ionic/vue/css/palettes/dark.system.css';
 import './theme/variables.css';
 
 const app = createApp(App)
+  .directive('imask', imaskDirective)
+  .use(VueTheMask)
   .use(IonicVue)
   .use(router);
 

@@ -4,6 +4,7 @@ import { checkmarkCircleOutline } from 'ionicons/icons'
 import { onMounted, ref, watch } from 'vue'
 import StudentService from '../services/StudentService'
 import PreEnrollmentService from '../services/PreEnrollmentService'
+import { Form, Field, ErrorMessage } from 'vee-validate';
 
 interface Props {
   pageWidth: string
@@ -101,10 +102,6 @@ const student = ref({
 
 })
 
-
-
-
-
 watch(result, async (value) => {
   finished.value = false
 
@@ -169,6 +166,7 @@ function generateRandomCode(): string {
 
 function nextStep() {
   if (student.value.name && student.value.birthdate) {
+    console.log('entrou no nextStep')
     // return next.value = true
     submitForm()
   }
@@ -229,46 +227,73 @@ const handleFileChange = async (event: Event) => {
 </script>
 
 <template>
+  <Form @submit="nextStep()">
   <IonGrid v-if="!finished" :class="Number(props.pageWidth) > 960 ? '' : 'ion-padding-horizontal'">
     <IonRow v-if="!next">
+
+      <!-- Campo Nome -->
       <IonCol size="12">
         <IonItem>
-          <IonInput v-model="student.name" type="text" label="Nome Completo*" label-placement="floating" />
+          <Field v-slot="{ field }" name="Nome Completo" rules="required|min:3|max:180">
+            <IonInput v-bind="field" v-model="student.name" type="text" label="Nome Completo*" label-placement="floating" />
+          </Field>
         </IonItem>
+        <ErrorMessage name="Nome Completo" v-slot="{ message }">
+            <span class="error-message">{{ message }}</span>
+          </ErrorMessage>
       </IonCol>
 
+      <!-- Campo Sexo -->
       <IonCol size="12" size-md="6">
         <IonItem>
-          <IonSelect v-model="student.gender" label="Sexo" label-placement="floating">
-            <IonSelectOption v-for="gender in genders" :key="gender" :value="gender">
-              {{ gender === 'M' ? 'Masculino' : 'Feminino' }}
-            </IonSelectOption>
-          </IonSelect>
+          <Field v-slot="{ field }" name="Sexo" rules="required">
+            <IonSelect v-bind="field" v-model="student.gender" label="Sexo" label-placement="floating">
+              <IonSelectOption v-for="gender in genders" :key="gender" :value="gender">
+                {{ gender === 'M' ? 'Masculino' : 'Feminino' }}
+              </IonSelectOption>
+            </IonSelect>
+          </Field>
         </IonItem>
+        <ErrorMessage name="Sexo" v-slot="{ message }">
+            <span class="error-message">{{ message }}</span>
+          </ErrorMessage>
       </IonCol>
 
+      <!-- Campo Data de nascimento -->
       <IonCol size="12" size-md="6">
         <IonItem>
-          <IonInput v-model="student.birthdate" type="date" label="Data de nascimento*" label-placement="floating" />
+          <Field v-slot="{ field }" name="Data de nascimento" rules="required">
+            <IonInput v-bind="field" v-model="student.birthdate" type="date" label="Data de nascimento*" label-placement="floating" />
+          </Field>
         </IonItem>
+        <ErrorMessage name="Data de nascimento" v-slot="{ message }">
+            <span class="error-message">{{ message }}</span>
+          </ErrorMessage>
       </IonCol>
 
+      <!-- Campo Turno -->
       <IonCol size="12" size-md="6">
         <IonItem>
-          <IonSelect v-model="shiftPreference" label="Preferência de turno" label-placement="floating">
-            <IonSelectOption value="MORNING">
-              Manhã
-            </IonSelectOption>
-            <IonSelectOption value="AFTERNOON">
-              Tarde
-            </IonSelectOption>
-            <IonSelectOption value="EVENING">
-              Noite
-            </IonSelectOption>
-          </IonSelect>
+          <Field v-slot="{ field }" name="Turno" rules="required">
+            <IonSelect v-bind="field" v-model="shiftPreference" label="Preferência de turno" label-placement="floating">
+              <IonSelectOption value="MORNING">
+                Manhã
+              </IonSelectOption>
+              <IonSelectOption value="AFTERNOON">
+                Tarde
+              </IonSelectOption>
+              <IonSelectOption value="EVENING">
+                Noite
+              </IonSelectOption>
+            </IonSelect>
+          </Field>
         </IonItem>
+        <ErrorMessage name="Turno" v-slot="{ message }">
+            <span class="error-message">{{ message }}</span>
+          </ErrorMessage>
       </IonCol>
 
+      <!-- Campo Foto -->
       <IonCol size="12" size-md="6">
         <IonItem>
           <label for="upPhoto">{{ fileName || "Foto 📷 " }}</label>
@@ -276,77 +301,155 @@ const handleFileChange = async (event: Event) => {
         </IonItem>
       </IonCol>
 
+      <!-- Campo Telefone -->
       <IonCol size="12" size-md="6">
         <IonItem>
-          <IonInput v-model="student.phone" type="text" label="Telefone" label-placement="floating" />
+          <Field v-slot="{ field }" name="Telefone" rules="required|phone">
+          <IonInput
+            v-bind="field"
+            v-model="student.phone"
+            v-imask="{ mask: '(00) 00000-0000' }"
+            type="text"
+            label="Telefone*"
+            label-placement="floating"
+          />
+          </Field>
         </IonItem>
+        <ErrorMessage name="Telefone" v-slot="{ message }">
+            <span class="error-message">{{ message }}</span>
+          </ErrorMessage>
+      </IonCol>
+
+      <!-- Campo E-Mail -->
+      <IonCol size="12" size-md="6">
+        <IonItem>
+          <Field v-slot="{ field }" name="E-Mail" rules="email">
+            <IonInput v-bind="field" v-model="student.email" type="email" label="E-Mail" label-placement="floating" />
+          </Field>
+        </IonItem>
+        <ErrorMessage name="E-Mail" v-slot="{ message }">
+            <span class="error-message">{{ message }}</span>
+          </ErrorMessage>
+      </IonCol>
+
+      <!-- Campo Bairro -->
+      <IonCol size="12" size-md="6">
+        <IonItem>
+          <Field v-slot="{ field }" name="Bairro" rules="min:3|max:180">
+            <IonInput v-bind="field" v-model="student.neighborhood" type="text" label="Bairro" label-placement="floating" />
+          </Field>
+        </IonItem>
+        <ErrorMessage name="Bairro" v-slot="{ message }">
+            <span class="error-message">{{ message }}</span>
+          </ErrorMessage>
+      </IonCol>
+
+      <!-- Campo Cidade -->
+      <IonCol size="12" size-md="6">
+        <IonItem>
+          <Field v-slot="{ field }" name="Cidade" rules="min:3|max:180">
+            <IonInput v-bind="field" v-model="student.city" type="text" label="Cidade" label-placement="floating" />
+          </Field>
+        </IonItem>
+        <ErrorMessage name="Cidade" v-slot="{ message }">
+            <span class="error-message">{{ message }}</span>
+          </ErrorMessage>
+      </IonCol>
+
+      <!-- Campo Endereço -->
+      <IonCol size="12" size-md="6">
+        <IonItem>
+          <Field v-slot="{ field }" name="Endereço" rules="min:3|max:180">
+            <IonInput v-bind="field" v-model="student.address" type="text" label="Endereço" label-placement="floating" />
+          </Field>
+        </IonItem>
+        <ErrorMessage name="Endereço" v-slot="{ message }">
+            <span class="error-message">{{ message }}</span>
+          </ErrorMessage>
+      </IonCol>
+
+      <!-- Campo CEP -->
+      <IonCol size="12" size-md="6">
+        <IonItem>
+          <Field v-slot="{ field }" name="CEP" rules="cep">
+            <IonInput
+              v-bind="field"
+              v-model="student.postalCode"
+              v-imask="{ mask: '00000-000' }"
+              type="text"
+              label="CEP"
+              label-placement="floating"
+            />
+          </Field>
+        </IonItem>
+        <ErrorMessage name="CEP" v-slot="{ message }">
+            <span class="error-message">{{ message }}</span>
+          </ErrorMessage>
+      </IonCol>
+
+      <!-- Campo CPF -->
+      <IonCol size="12" size-md="6">
+        <IonItem>
+          <Field v-slot="{ field }" name="CPF" rules="required|cpf">
+            <IonInput
+              v-bind="field"
+              v-model="student.cpf"
+              v-imask="{ mask: '000.000.000-00' }"
+              type="text"
+              label="CPF*"
+              label-placement="floating"
+            />
+          </Field>
+        </IonItem>
+        <ErrorMessage name="CPF" v-slot="{ message }">
+            <span class="error-message">{{ message }}</span>
+          </ErrorMessage>
       </IonCol>
 
       <IonCol size="12" size-md="6">
         <IonItem>
-          <IonInput v-model="student.email" type="email" label="E-Mail" label-placement="floating" />
+          <Field v-slot="{ field }" name="Responsável" rules="required">
+            <IonSelect v-bind="field" v-model="student.responsibleType" label="Responsável" label-placement="floating">
+              <IonSelectOption value="MÃE">
+                Mãe
+              </IonSelectOption>
+              <IonSelectOption value="PAI">
+                Pai
+              </IonSelectOption>
+              <IonSelectOption value="AMBOS">
+                Ambos
+              </IonSelectOption>
+              <IonSelectOption value="OUTRO">
+                Guardião
+              </IonSelectOption>
+            </IonSelect>
+          </Field>
         </IonItem>
-      </IonCol>
-
-      <IonCol size="12" size-md="6">
-        <IonItem>
-          <IonInput v-model="student.neighborhood" type="text" label="Bairro" label-placement="floating" />
-        </IonItem>
-      </IonCol>
-
-      <IonCol size="12" size-md="6">
-        <IonItem>
-          <IonInput v-model="student.city" type="text" label="Cidade" label-placement="floating" />
-        </IonItem>
-      </IonCol>
-
-      <IonCol size="12" size-md="6">
-        <IonItem>
-          <IonInput v-model="student.address" type="text" label="Endereço" label-placement="floating" />
-        </IonItem>
-      </IonCol>
-
-      <IonCol size="12" size-md="6">
-        <IonItem>
-          <IonInput v-model="student.postalCode" type="text" label="CEP" label-placement="floating" />
-        </IonItem>
-      </IonCol>
-
-      <IonCol size="12" size-md="6">
-        <IonItem>
-          <IonInput v-model="student.cpf" type="text" label="CPF" label-placement="floating" />
-        </IonItem>
-      </IonCol>
-
-      <IonCol size="12" size-md="6">
-        <IonItem>
-          <IonSelect v-model="student.responsibleType" label="Responsável" label-placement="floating">
-            <IonSelectOption value="MÃE">
-              Mãe
-            </IonSelectOption>
-            <IonSelectOption value="PAI">
-              Pai
-            </IonSelectOption>
-            <IonSelectOption value="AMBOS">
-              Ambos
-            </IonSelectOption>
-            <IonSelectOption value="OUTRO">
-              Guardião
-            </IonSelectOption>
-          </IonSelect>
-        </IonItem>
+        <ErrorMessage name="Responsável" v-slot="{ message }">
+            <span class="error-message">{{ message }}</span>
+          </ErrorMessage>
       </IonCol>
 
       <IonCol size="12" size-md="6" v-if="student.responsibleType === 'PAI' || student.responsibleType === 'AMBOS'">
         <IonItem>
-          <IonInput v-model="student.fatherName" type="text" label="Nome do Pai" label-placement="floating" />
+          <Field v-slot="{ field }" name="Nome completo do Pai" rules="required|min:3|max:180">
+            <IonInput v-bind="field" v-model="student.fatherName" type="text" label="Nome completo do Pai" label-placement="floating" />
+          </Field>
         </IonItem>
+        <ErrorMessage name="Nome completo do Pai" v-slot="{ message }">
+            <span class="error-message">{{ message }}</span>
+          </ErrorMessage>
       </IonCol>
 
       <IonCol size="12" size-md="6" v-if="student.responsibleType === 'PAI' || student.responsibleType === 'AMBOS'">
         <IonItem>
-          <IonInput v-model="student.fatherCpf" type="text" label="CPF do Pai" label-placement="floating" />
+          <Field v-slot="{ field }" name="CPF do Pai" rules="required|cpf">
+            <IonInput v-bind="field" v-model="student.fatherCpf" type="text" label="CPF do Pai" label-placement="floating" />
+          </Field>
         </IonItem>
+        <ErrorMessage name="CPF do Pai" v-slot="{ message }">
+            <span class="error-message">{{ message }}</span>
+          </ErrorMessage>
       </IonCol>
 
       <IonCol size="12" size-md="6" v-if="student.responsibleType === 'PAI' || student.responsibleType === 'AMBOS'">
@@ -363,14 +466,24 @@ const handleFileChange = async (event: Event) => {
 
       <IonCol size="12" size-md="6" v-if="student.responsibleType === 'MÃE' || student.responsibleType === 'AMBOS'">
         <IonItem>
-          <IonInput v-model="student.motherName" type="text" label="Nome da Mãe" label-placement="floating" />
+          <Field v-slot="{ field }" name="Nome completo da Mãe" rules="required|min:3|max:180">
+            <IonInput v-bind="field" v-model="student.motherName" type="text" label="Nome completo da Mãe" label-placement="floating" />
+          </Field>
         </IonItem>
+        <ErrorMessage name="Nome completo da Mãe" v-slot="{ message }">
+            <span class="error-message">{{ message }}</span>
+          </ErrorMessage>
       </IonCol>
 
       <IonCol size="12" size-md="6" v-if="student.responsibleType === 'MÃE' || student.responsibleType === 'AMBOS'">
         <IonItem>
-          <IonInput v-model="student.motherCpf" type="text" label="CPF da Mãe" label-placement="floating" />
+          <Field v-slot="{ field }" name="CPF da Mãe" rules="required|cpf">
+            <IonInput v-bind="field" v-model="student.motherCpf" type="text" label="CPF da Mãe" label-placement="floating" />
+          </Field>
         </IonItem>
+        <ErrorMessage name="CPF da Mãe" v-slot="{ message }">
+            <span class="error-message">{{ message }}</span>
+          </ErrorMessage>
       </IonCol>
 
       <IonCol size="12" size-md="6" v-if="student.responsibleType === 'MÃE' || student.responsibleType === 'AMBOS'">
@@ -387,8 +500,13 @@ const handleFileChange = async (event: Event) => {
 
       <IonCol size="12" size-md="6" v-if="student.responsibleType === 'OUTRO'">
         <IonItem>
-          <IonInput v-model="student.guardianName" type="text" label="Nome do Guardião" label-placement="floating" />
+          <Field v-slot="{ field }" name="Nome completo do Guardião" rules="required|min:3|max:180">
+          <IonInput v-bind="field" v-model="student.guardianName" type="text" label="Nome completo do Guardião" label-placement="floating" />
+        </Field>
         </IonItem>
+        <ErrorMessage name="Nome completo do Guardião" v-slot="{ message }">
+            <span class="error-message">{{ message }}</span>
+          </ErrorMessage>
       </IonCol>
 
       <IonCol size="12" size-md="6" v-if="student.responsibleType === 'OUTRO'">
@@ -400,8 +518,13 @@ const handleFileChange = async (event: Event) => {
 
       <IonCol size="12" size-md="6" v-if="student.responsibleType === 'OUTRO'">
         <IonItem>
-          <IonInput v-model="student.guardianCpf" type="text" label="CPF do Guardião" label-placement="floating" />
+          <Field v-slot="{ field }" name="CPF do Guardião" rules="required|cpf">
+          <IonInput v-bind="field" v-model="student.guardianCpf" type="text" label="CPF do Guardião" label-placement="floating" />
+        </Field>
         </IonItem>
+        <ErrorMessage name="CPF do Guardião" v-slot="{ message }">
+            <span class="error-message">{{ message }}</span>
+          </ErrorMessage>
       </IonCol>
 
       <IonCol size="12" size-md="6" v-if="student.responsibleType === 'OUTRO'">
@@ -412,71 +535,87 @@ const handleFileChange = async (event: Event) => {
 
       <IonCol size="12" size-md="6">
         <IonItem>
-          <IonSelect v-model="student.residenceZone" label="Zona de Residência" label-placement="floating">
+          <Field v-slot="{ field }" name="Zona da Residência">
+          <IonSelect v-bind="field" v-model="student.residenceZone" label="Zona de Residência" label-placement="floating">
             <IonSelectOption v-for="zone in residenceZone" :key="zone" :value="zone.toUpperCase()">
               {{ zone }}
             </IonSelectOption>
           </IonSelect>
+        </Field>
         </IonItem>
       </IonCol>
 
       <IonCol size="12" size-md="6">
         <IonItem>
-          <IonSelect v-model="student.disability" label="Deficiência" label-placement="floating">
+          <Field v-slot="{ field }" name="Deficiência">
+          <IonSelect v-bind="field" v-model="student.disability" label="Deficiência" label-placement="floating">
             <IonSelectOption v-for="disability in disabilities" :key="disability" :value="disability">
               {{ disability.toLowerCase().replaceAll('_', ' ') }}
             </IonSelectOption>
           </IonSelect>
+        </Field>
         </IonItem>
       </IonCol>
 
       <IonCol size="12" size-md="6">
         <IonItem>
-          <IonInput v-model="student.rgNumber" type="text" label="RG" label-placement="floating" />
+          <Field v-slot="{ field }" name="RG">
+          <IonInput v-bind="field" v-model="student.rgNumber" type="text" label="RG" label-placement="floating" />
+        </Field>
         </IonItem>
       </IonCol>
 
       <IonCol size="12" size-md="6">
         <IonItem>
-          <IonInput v-model="student.rgIssueDate" type="date" label="Lançamento do RG" label-placement="floating" />
+          <Field v-slot="{ field }" name="Data de expedição">
+          <IonInput v-bind="field" v-model="student.rgIssueDate" type="date" label="Data de expedição" label-placement="floating" />
+        </Field>
         </IonItem>
       </IonCol>
 
       <IonCol size="12" size-md="6">
         <IonItem>
-          <IonSelect v-model="student.rgState" label="Estado do RG" label-placement="floating">
+          <Field v-slot="{ field }" name="Estado emissor">
+          <IonSelect v-bind="field" v-model="student.rgState" label="Estado emissor" label-placement="floating">
             <IonSelectOption v-for="state in states" :key="state" :value="state">
               {{ state }}
             </IonSelectOption>
           </IonSelect>
+        </Field>
         </IonItem>
       </IonCol>
 
       <IonCol size="12" size-md="6">
         <IonItem>
-          <IonInput v-model="student.rgIssuer" type="text" label="Emissor do RG" label-placement="floating" />
+          <Field v-slot="{ field }" name="Órgão emissor">
+            <IonInput v-bind="field" v-model="student.rgIssuer" type="text" label="Órgão emissor" label-placement="floating" />
+          </Field>
         </IonItem>
       </IonCol>
 
       <IonCol size="12" size-md="6">
         <IonItem>
-          <IonSelect v-model="student.placeOfBirth" label="Naturalidade" label-placement="floating">
+          <Field v-slot="{ field }" name="Naturalidade">
+          <IonSelect v-bind="field" v-model="student.placeOfBirth" label="Naturalidade" label-placement="floating">
             <IonSelectOption v-for="state in states" :key="state" :value="state">
               {{ state }}
             </IonSelectOption>
           </IonSelect>
+        </Field>
         </IonItem>
       </IonCol>
 
       <IonCol size="12" size-md="6">
         <IonItem>
-          <IonInput v-model="student.birthCertificate" type="text" label="Certidão de Nascimento"
+          <Field v-slot="{ field }" name="Certidão de Nascimento">
+          <IonInput v-bind="field" v-model="student.birthCertificate" type="text" label="Certidão de Nascimento"
             label-placement="floating" />
+          </Field>
         </IonItem>
       </IonCol>
 
       <IonCol>
-        <IonButton expand="full" color="tertiary" @click="nextStep()">
+        <IonButton type="submit" expand="full" color="tertiary">
           Continuar
         </IonButton>
       </IonCol>
@@ -525,11 +664,18 @@ const handleFileChange = async (event: Event) => {
     sub-header="Campos obrigatórios tem um asterisco (*)"
     :message="adicionalRequired ? `Preencha também Telefone e RG, CPF ou Certidão de Nascimento para efetuar a pré-matrícula` : `Os campos Nome e Data de Nascimento são obrigatórios`"
     :buttons="['Fechar']" @did-dismiss="incompleteStep = false" />
+  </form>
 </template>
 
 <style scoped>
 ion-content {
   --padding-start: 16px;
   --padding-end: 16px;
+}
+
+.error-message {
+  color: red;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
 }
 </style>
