@@ -112,7 +112,8 @@ onMounted(async () => {
   transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-.school-card:hover { 
+.school-card:hover {
+  background-color: #f0f0f0; 
   transform: scale(1.02); 
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
 }

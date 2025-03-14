@@ -262,7 +262,7 @@ const handleFileChange = async (event: Event) => {
       <!-- Campo Data de nascimento -->
       <IonCol size="12" size-md="6">
         <IonItem>
-          <Field v-slot="{ field }" name="Data de nascimento" rules="required">
+          <Field v-slot="{ field }" name="Data de nascimento" rules="required|notFuture">
             <IonInput v-bind="field" v-model="student.birthdate" type="date" label="Data de nascimento*" label-placement="floating" />
           </Field>
         </IonItem>
@@ -567,10 +567,13 @@ const handleFileChange = async (event: Event) => {
 
       <IonCol size="12" size-md="6">
         <IonItem>
-          <Field v-slot="{ field }" name="Data de expedição">
+          <Field v-slot="{ field }" name="Data de expedição" rules="notFuture">
           <IonInput v-bind="field" v-model="student.rgIssueDate" type="date" label="Data de expedição" label-placement="floating" />
         </Field>
         </IonItem>
+        <ErrorMessage name="Data de expedição" v-slot="{ message }">
+            <span class="error-message">{{ message }}</span>
+          </ErrorMessage>
       </IonCol>
 
       <IonCol size="12" size-md="6">

@@ -197,14 +197,8 @@ onMounted(async () => {
 
   <div class="ion-padding-bottom">
     <div style="min-height: 250px; " class="flex wrap">
-      <container v-if="loading"
-        style="height: 120px; width: 120px; background-color: white; margin: auto; border-radius: 100%;" class="flex">
-        <IonIcon v-if="finished" :icon="checkmarkCircleOutline" class="my-auto mx-auto"
-          style="font-size: 80px; color:lawngreen;" />
-        <IonSpinner v-else class="my-auto mx-auto" name="crescent" />
-      </container>
       <!-- Etapa 1 -->
-      <div v-else-if="etapa === 1" style="min-width: 100%;">
+      <div v-if="etapa === 1" style="min-width: 100%;">
         <selectSchoolSlider v-model="selectedSchool" :query="props.searchbox" />
       </div>
       <!-- Etapa 2 -->

@@ -27,7 +27,6 @@ defineRule('cep', (value: string) => {
 
 defineRule('phone', (value: string) => {
   if (!value || !validatePhone(value)) {
-    console.log("Telefone inválido pow")
     return 'Telefone inválido'
   }
   return true
@@ -47,6 +46,23 @@ defineRule('email', (value: string) => {
   defineRule('cnpj', (value: string) => {
     if (!value || !validateCNPJ(value)) {
       return 'CNPJ inválido'
+    }
+    return true
+  })
+
+  defineRule('notFuture', (value: string) => {
+    if (!value) {
+      return true
+    }
+  
+    const inputDate = new Date(value)
+    const today = new Date()
+  
+    inputDate.setHours(0, 0, 0, 0)
+    today.setHours(0, 0, 0, 0)
+  
+    if (inputDate > today) {
+      return 'A data está invcorreta.'
     }
     return true
   })
