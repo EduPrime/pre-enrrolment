@@ -16,13 +16,13 @@ defineRule('cpf', (value: string) => {
 
 defineRule('cep', (value: string) => {
     if (!value) {
-        return true;
+        return true
       }
 
       if (!validateCep(value)) {
-        return 'CEP inválido';
+        return 'CEP inválido'
       }
-      return true;
+      return true
 })
 
 defineRule('phone', (value: string) => {
@@ -34,13 +34,13 @@ defineRule('phone', (value: string) => {
 
 defineRule('email', (value: string) => {
     if (!value) {
-        return true;
+        return true
       }
       
       if (!validateEmail(value)) {
-        return 'Email inválido';
+        return 'Email inválido'
       }
-      return true;
+      return true
   })
 
   defineRule('cnpj', (value: string) => {

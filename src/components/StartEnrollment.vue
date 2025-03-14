@@ -58,6 +58,58 @@ const preEnrollment = ref({
   status: "ACTIVE",
   situation: "PENDENTE",
 })
+
+function resetState(resetAll = true) {
+  const oldInstitutionId = preEnrollment.value.institutionId
+  
+    preEnrollment.value = {
+      id: '',
+      institutionId: oldInstitutionId,
+      schoolId: '',
+      courseId: '',
+      seriesId: '',
+      studentId: '',
+      observations: '',
+      preenrollmentcode: '',
+      datePreenrollment: new Date(),
+      preferShift: null,
+      createdAt: new Date(),
+      updatedAt: null,
+      tenantId: null,
+      deletedAt: null,
+      updatedBy: null,
+      status: "ACTIVE",
+      situation: "PENDENTE",
+    };
+    selectedSchool.value = undefined;
+    selectedCourse.value = undefined;
+    selectedSeries.value = undefined;
+
+    studentId.value = undefined;
+    shiftPreference.value = undefined;
+    insertedPreEnrollment.value = undefined;
+    postStatus.value = undefined;
+  } 
+
+function cadastrarOutroAluno() {
+  console.log('cadastrar outro aluno')
+  resetState(); 
+  setTimeout(() => {
+    console.log('Etapa atual:', etapa.value);
+    etapa.value = 1; 
+    console.log('etapa cadastrar outro aluno ', etapa.value)
+  }, 0);
+}
+
+/*function cadastrarOutroAlunoMesmaTurma() {
+  resetState(false); 
+  setTimeout(() => {
+    console.log('Etapa atual:', etapa.value);
+    etapa.value = 4; 
+    console.log('etapa cadastrar outro aluno na mesma turma ', etapa.value)
+  }, 0);
+}*/
+
 watch(selectedSchool, (value) => {
   if (value) {
     preEnrollment.value.schoolId = value.id
@@ -190,10 +242,6 @@ onMounted(async () => {
 </script>
 
 <template>
-  <IonButton v-if="postStatus?.loading" :class="pageWidth?.pageWidth < 992 ? 'ion-margin-start' : ''" color="light"
-    @click="postStatus = undefined">
-    <IonIcon :icon="arrowBackOutline" />
-  </IonButton>
 
   <div class="ion-padding-bottom">
     <div style="min-height: 250px; " class="flex wrap">
@@ -257,6 +305,20 @@ onMounted(async () => {
                     <IonIcon :icon="checkmarkCircleOutline" class="my-auto mx-auto"
                       style="font-size: 130px; color:lawngreen;" />
                   </div>
+
+                  <div class="flex flex-col gap-2">
+                    <IonButton expand="block" color="tertiary" @click="cadastrarOutroAluno" class="button-cadastrarOutroAluno">
+                      Cadastrar outro aluno
+                    </IonButton>
+
+                  </div>
+
+                  <!--<div class="flex flex-col gap-2">
+                    <IonButton expand="block" color="tertiary" @click="cadastrarOutroAlunoMesmaTurma">
+                      Cadastrar outro aluno
+                    </IonButton>
+
+                  </div>-->
                 </IonCardContent>
               </ion-card>
             </IonCol>
@@ -272,4 +334,9 @@ ion-spinner {
   width: 80px;
   height: 80px;
 }
+
+.button-cadastrarOutroAluno {
+  margin-left: auto;
+}
+
 </style>

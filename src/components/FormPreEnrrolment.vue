@@ -102,6 +102,33 @@ const student = ref({
 
 })
 
+/*async function buscarEndereco(cep: string) {
+  try {
+    const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+    const data = await response.json();
+    if (data.erro) {
+      throw new Error('CEP não encontrado');
+    }
+    return data;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+}
+
+watch(() => student.postalCode, async (novoCep) => {
+  console.log('entrou no negocio do CEP')
+  const cepLimpo = novoCep?.replace(/\D/g, '');
+  if (cepLimpo && cepLimpo.length === 8) {
+    const endereco = await buscarEndereco(cepLimpo);
+    if (endereco) {
+      student.address = endereco.logradouro;
+      student.neighborhood = endereco.bairro;
+      student.city = endereco.localidade;
+    }
+  }
+});*/
+
 watch(result, async (value) => {
   finished.value = false
 
@@ -548,7 +575,7 @@ const handleFileChange = async (event: Event) => {
       <IonCol size="12" size-md="6">
         <IonItem>
           <Field v-slot="{ field }" name="Deficiência">
-          <IonSelect v-bind="field" v-model="student.disability" label="Deficiência" label-placement="floating">
+          <IonSelect v-bind="field" v-model="student.disability" label="Deficiência" label-placement="floating" multiple>
             <IonSelectOption v-for="disability in disabilities" :key="disability" :value="disability">
               {{ disability.toLowerCase().replaceAll('_', ' ') }}
             </IonSelectOption>
@@ -629,26 +656,7 @@ const handleFileChange = async (event: Event) => {
     </IonRow>
   </IonGrid>
 
-  <IonGrid v-else :class="Number(props.pageWidth) > 960 ? '' : 'ion-padding-horizontal'">
-    <IonRow>
-      <IonCol size="12">
-        <ion-card>
-          <ion-card-header>
-            <ion-card-title>Pré-Matrícula realizada com sucesso</ion-card-title>
-          </ion-card-header>
-          <ion-card-content>
-            <p>Os dados do aluno foram salvos com sucesso.</p>
-            <div class="flex" style="min-height: 150px;">
-              <IonIcon :icon="checkmarkCircleOutline" class="my-auto mx-auto"
-                style="font-size: 130px; color:lawngreen;" />
-            </div>
-          </ion-card-content>
-        </ion-card>
-      </IonCol>
-    </IonRow>
-  </IonGrid>
-
-  <IonAlert :is-open="duplicated" trigger="present-alert" header="Aluno já cadastrado"
+  <!--<IonAlert :is-open="duplicated" trigger="present-alert" header="Aluno já cadastrado"
     sub-header="Desculpe mas este aluno já foi cadastrado anteriormente."
     message="Caso deseje você pode clicar em 'atualizar' para atualizar os dados que já foram cadastrados anteriormente."
     :buttons="[{
@@ -656,7 +664,11 @@ const handleFileChange = async (event: Event) => {
       handler: () => {
         console.info('Função (Atualizar cadastro) ainda não implementada')
       },
-    }, 'Continuar']" @did-dismiss="closeDialog()" />
+    }, 'Continuar']" @did-dismiss="closeDialog()" />-->
+
+<IonAlert :is-open="duplicated" trigger="present-alert" header="Aluno já cadastrado!"
+    message="Desculpe, mas este aluno já foi cadastrado anteriormente."
+    :buttons="[{text: 'Fechar',}]" @did-dismiss="closeDialog()" />
 
   <IonAlert :is-open="someProblems" trigger="present-alert" header="Desculpe, ocorreu um erro ao salvar os dados"
     sub-header="Erro ao salvar os dados do aluno"
