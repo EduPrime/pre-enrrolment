@@ -398,7 +398,7 @@ const handleFileChange = async (event: Event) => {
       <!-- Campo CEP -->
       <IonCol size="12" size-md="6">
         <IonItem>
-          <Field v-slot="{ field }" name="CEP" rules="cep">
+          <Field v-slot="{ field }" name="CEP" rules="required|cep">
             <IonInput
               v-bind="field"
               v-model="student.postalCode"
