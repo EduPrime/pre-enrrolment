@@ -19,11 +19,6 @@ const queryBlock3 = ref()
 //     router.push('/details');
 // };
 
-function handleInput(event: { target: any }) {
-  const query = event.target.value.toLowerCase()
-  queryBlock2.value = query
-}
-
 function handleTrackInput(event: { target: any }) {
   const query = event.target.value.toLowerCase()
 
@@ -118,7 +113,7 @@ onMounted(async () => {
             </h2>
 
             <div v-if="etapa === 1" class="ion-padding-top ">
-              <IonSearchbar placeholder="Buscar Escola..." @ion-input="handleInput($event)" />
+              <IonSearchbar placeholder="Buscar Escola..." v-model="queryBlock2" />
             </div>
           </div>
           <startEnrollment v-model="etapa" :searchbox="queryBlock2" />

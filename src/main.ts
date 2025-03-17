@@ -1,6 +1,9 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router';
+import imaskDirective from '../src/utils/imasks';
+import './utils/validationRules'
+import './utils/veeValidateErrorMessagesConfig'
 
 import { IonicVue } from '@ionic/vue';
 
@@ -35,6 +38,7 @@ import '@ionic/vue/css/palettes/dark.system.css';
 import './theme/variables.css';
 
 const app = createApp(App)
+  .directive('imask', imaskDirective)
   .use(IonicVue)
   .use(router);
 

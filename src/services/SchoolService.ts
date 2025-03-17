@@ -29,6 +29,7 @@ export default class SchoolService extends BaseService<TabelaType> {
   }
 
   async searchSchools(searchTerm?: string) {
+    console.log('entrou no searchSchols')
     try {
       let query = this.client
         .from('school')

@@ -53,7 +53,10 @@ watch(() => props.school, async (value) => {
   if (value) {
     // console.log('props.school:', value)
 
-    courseList.value = await postgrest.getCoursesBySchoolId(props.school)
+    const allCourses = await postgrest.getCoursesBySchoolId(props.school)
+    courseList.value = allCourses?.filter(course => course.name !== 'Maternal')
+
+    console.log('courseList.value', courseList.value)
 
     // console.log('courseList atualizado:', courseList.value)
   }
@@ -84,6 +87,7 @@ onMounted(() => {
       <SwiperSlide v-for="courses in boundledCourses" :key="courses">
         <div>
           <IonCard
+            class="course-card"
             v-for="course in courses.items" :key="course"
             style="height: 160px; margin-bottom: 25px;  background-image: linear-gradient(to  right, var(--ion-color-tertiary) -70%, #fff 50%  );"
             @click="emits('update:modelValue', course)"
@@ -104,6 +108,18 @@ onMounted(() => {
     </Swiper>
   </div>
 </template>
+
+<style>
+
+.course-card{
+  cursor: pointer; 
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.course-card:hover{
+  transform: scale(1.02);  
+}
+</style>
 
 <!-- <script>
       // import Swiper core and required modules

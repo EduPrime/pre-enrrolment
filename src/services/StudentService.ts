@@ -98,15 +98,9 @@ export default class StudentService extends BaseService<TabelaType> {
   }
   async getStudentByResponsible(cpf: string) {
     try {
-      const information = ref({
-        preenrollmentcode: undefined as any,
-        student: undefined as any,
-        course: undefined as any,
-        school: undefined as any,
-        series: undefined as any,
-        situation: undefined as any,
-      })
 
+      const studentsInformation = [];
+  
       const { data } = await this.client
         .from('student')
         .select(`
@@ -120,17 +114,23 @@ export default class StudentService extends BaseService<TabelaType> {
           )
         `)
         .or(`fatherCpf.eq.${cpf},motherCpf.eq.${cpf},guardianCpf.eq.${cpf}`);
-
+  
       if (data && data.length > 0) {
-        information.value.preenrollmentcode = data[0].preenrollment[0].preenrollmentcode
-        information.value.student = data[0].name
-        information.value.course = await this.genericGet('course', data[0].preenrollment[0].courseId)
-        information.value.school = await this.genericGet('school', data[0].preenrollment[0].schoolId)
-        information.value.series = await this.genericGet('series', data[0].preenrollment[0].seriesId)
-        information.value.situation = data[0].preenrollment[0].situation
+        for (const student of data) {
+          const information = {
+            preenrollmentcode: student.preenrollment[0].preenrollmentcode,
+            student: student.name,
+            course: await this.genericGet('course', student.preenrollment[0].courseId),
+            school: await this.genericGet('school', student.preenrollment[0].schoolId),
+            series: await this.genericGet('series', student.preenrollment[0].seriesId),
+            situation: student.preenrollment[0].situation,
+          };
+  
+          studentsInformation.push(information);
+        }
       }
-
-      return information.value;
+  
+      return studentsInformation;
     } catch (error) {
       if (error instanceof Error) {
         throw new Error(`Erro inesperado: ${error.message}`);
