@@ -362,6 +362,25 @@ const handleFileChange = async (event: Event) => {
             </ErrorMessage>
         </IonCol>
 
+        <!-- Campo CEP -->
+        <IonCol size="12" size-md="6">
+          <IonItem>
+            <Field v-slot="{ field }" name="CEP" rules="required|cep">
+              <IonInput
+                v-bind="field"
+                v-model="student.postalCode"
+                v-imask="{ mask: '00000-000' }"
+                type="text"
+                label="CEP"
+                label-placement="floating"
+              />
+            </Field>
+          </IonItem>
+          <ErrorMessage name="CEP" v-slot="{ message }">
+              <span class="error-message">{{ message }}</span>
+            </ErrorMessage>
+        </IonCol>
+
         <!-- Campo Bairro -->
         <IonCol size="12" size-md="6">
           <IonItem>
@@ -394,25 +413,6 @@ const handleFileChange = async (event: Event) => {
             </Field>
           </IonItem>
           <ErrorMessage name="Endereço" v-slot="{ message }">
-              <span class="error-message">{{ message }}</span>
-            </ErrorMessage>
-        </IonCol>
-
-        <!-- Campo CEP -->
-        <IonCol size="12" size-md="6">
-          <IonItem>
-            <Field v-slot="{ field }" name="CEP" rules="required|cep">
-              <IonInput
-                v-bind="field"
-                v-model="student.postalCode"
-                v-imask="{ mask: '00000-000' }"
-                type="text"
-                label="CEP"
-                label-placement="floating"
-              />
-            </Field>
-          </IonItem>
-          <ErrorMessage name="CEP" v-slot="{ message }">
               <span class="error-message">{{ message }}</span>
             </ErrorMessage>
         </IonCol>

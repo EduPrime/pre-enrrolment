@@ -53,7 +53,10 @@ watch(() => props.school, async (value) => {
   if (value) {
     // console.log('props.school:', value)
 
-    courseList.value = await postgrest.getCoursesBySchoolId(props.school)
+    const allCourses = await postgrest.getCoursesBySchoolId(props.school)
+    courseList.value = allCourses?.filter(course => course.name !== 'Maternal')
+
+    console.log('courseList.value', courseList.value)
 
     // console.log('courseList atualizado:', courseList.value)
   }
