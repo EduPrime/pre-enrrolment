@@ -19,12 +19,6 @@ const queryBlock3 = ref()
 //     router.push('/details');
 // };
 
-function handleInput(event: { target: string }) {
-  console.log('handleInput => ', event.target.value)
-  const query = event.target.value.toLowerCase()
-  queryBlock2.value = query
-}
-
 function handleTrackInput(event: { target: any }) {
   const query = event.target.value.toLowerCase()
 
