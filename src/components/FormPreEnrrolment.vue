@@ -569,7 +569,7 @@ const handleFileChange = async (event: Event) => {
         <IonCol size="12" size-md="6" v-if="student.responsibleType === 'PAI' || student.responsibleType === 'AMBOS'">
           <IonItem>
             <Field v-slot="{ field }" name="CPF do Pai" rules="required|cpf">
-              <IonInput v-bind="field" v-model="student.fatherCpf" type="text" label="CPF do Pai" label-placement="floating" />
+              <IonInput v-bind="field" v-model="student.fatherCpf" v-imask="{ mask: '000.000.000-00' }" type="text" label="CPF do Pai" label-placement="floating" />
             </Field>
           </IonItem>
           <ErrorMessage name="CPF do Pai" v-slot="{ message }">
@@ -617,7 +617,7 @@ const handleFileChange = async (event: Event) => {
         <IonCol size="12" size-md="6" v-if="student.responsibleType === 'MÃE' || student.responsibleType === 'AMBOS'">
           <IonItem>
             <Field v-slot="{ field }" name="CPF da Mãe" rules="required|cpf">
-              <IonInput v-bind="field" v-model="student.motherCpf" type="text" label="CPF da Mãe" label-placement="floating" />
+              <IonInput v-bind="field" v-model="student.motherCpf" v-imask="{ mask: '000.000.000-00' }" type="text" label="CPF da Mãe" label-placement="floating" />
             </Field>
           </IonItem>
           <ErrorMessage name="CPF da Mãe" v-slot="{ message }">
@@ -665,7 +665,7 @@ const handleFileChange = async (event: Event) => {
         <IonCol size="12" size-md="6" v-if="student.responsibleType === 'OUTRO'">
           <IonItem>
             <Field v-slot="{ field }" name="CPF do Guardião" rules="required|cpf">
-            <IonInput v-bind="field" v-model="student.guardianCpf" type="text" label="CPF do Guardião" label-placement="floating" />
+            <IonInput v-bind="field" v-model="student.guardianCpf" v-imask="{ mask: '000.000.000-00' }" type="text" label="CPF do Guardião" label-placement="floating" />
           </Field>
           </IonItem>
           <ErrorMessage name="CPF do Guardião" v-slot="{ message }">
