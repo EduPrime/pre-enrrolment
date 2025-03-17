@@ -117,7 +117,6 @@ async function buscarEndereco(cep: string) {
 }
 
 watch(() => student.value.postalCode, async (novoCep) => {
-  console.log('entrou no negocio do CEP')
   const cepLimpo = String(novoCep).replace(/\D/g, '');
   if (cepLimpo && cepLimpo.length === 8) {
     const endereco = await buscarEndereco(cepLimpo);
@@ -193,7 +192,6 @@ function generateRandomCode(): string {
 
 function nextStep() {
   if (student.value.name && student.value.birthdate) {
-    console.log('entrou no nextStep')
     // return next.value = true
     submitForm()
   }
