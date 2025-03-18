@@ -6,6 +6,7 @@ import appFooter from '../components/AppFooter.vue'
 import remainingTime from '../components/RemainingTime.vue'
 import startEnrollment from '../components/StartEnrollment.vue'
 import trackEnrollment from '../components/TrackEnrollment.vue'
+import { Field, ErrorMessage } from 'vee-validate';
 
 const etapa = ref(1)
 const trackNotFound = ref()
@@ -142,12 +143,12 @@ onMounted(async () => {
             </IonRow>
           </div>
           <div :class="trackNotFound === true && trackNotFound === false ? 'ion-padding-top' : '' ">
-            <IonSearchbar v-model="queryBlock3" placeholder="Digite o CPF..." @ion-input="handleTrackInput($event)" />
+            <IonSearchbar v-model="queryBlock3" v-imask="{ mask: '000.000.000-00' }" placeholder="Digite o CPF..." @ion-input="handleTrackInput($event)" />
           </div>
           <div class="ion-padding-bottom ion-padding-top">
             <trackEnrollment v-model="trackNotFound" :query="queryBlock3" />
             <div class="ion-padding-bottom ion-padding-top">
-              <IonButton expand="full" href="/pre-enrollment#block2">
+              <IonButton v-if="trackNotFound === false" expand="full" href="/pre-enrollment#block2">
                 Começar Agora
               </IonButton>
               <IonButton

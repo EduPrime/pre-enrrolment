@@ -37,6 +37,16 @@ import '@ionic/vue/css/palettes/dark.system.css';
 /* Theme variables */
 import './theme/variables.css';
 
+const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+
+if (prefersDark.matches) {
+  document.body.classList.add('dark');
+}
+
+prefersDark.addEventListener('change', (e) => {
+  document.body.classList.toggle('dark', e.matches);
+});
+
 const app = createApp(App)
   .directive('imask', imaskDirective)
   .use(IonicVue)
@@ -45,3 +55,4 @@ const app = createApp(App)
 router.isReady().then(() => {
   app.mount('#app');
 });
+

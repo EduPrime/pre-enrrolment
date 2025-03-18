@@ -64,7 +64,7 @@ onMounted(async () => {
         @slideChange="onSlideChange" -->
   <div :style="pageWidth?.pageWidth > 992 ? 'max-width: 992px' : 'width: 100vw;'">
     <Swiper
-      :modules="modules" :slides-per-view="pageWidth?.pageWidth > 992 ? 1.4 : 1" :space-between="5"
+      :modules="modules" :slides-per-view="pageWidth?.pageWidth >= 992 ? 2 : 1" :space-between="8"
       :scrollbar="{ draggable: true }"
     >
       <SwiperSlide v-for="series in boundledSeries" :key="series">
@@ -72,7 +72,7 @@ onMounted(async () => {
           <IonCard
             class="series-card"
             v-for="serie in series.items" :key="serie"
-            style=" margin-bottom: 25px; background-image: linear-gradient(to  right, var(--ion-color-tertiary) -50%, #fff 60%  );"
+            style="height: 140px; margin-bottom: 25px; background-image: linear-gradient(to  right, var(--ion-color-tertiary) -50%, #fff 60%  );"
             @click="emits('update:modelValue', serie)"
           >
             <IonCardHeader>
@@ -94,6 +94,7 @@ onMounted(async () => {
 <style>
 
 .series-card{
+  padding: 10px;
   cursor: pointer; 
   transition: background-color 0.3s ease, transform 0.3s ease;
 }

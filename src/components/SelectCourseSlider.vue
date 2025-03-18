@@ -81,7 +81,7 @@ onMounted(() => {
     <!-- @swiper="onSwiper"
    @slideChange="onSlideChange" -->
     <Swiper
-      :modules="modules" :slides-per-view="boundledCourses?.length > 1 ? 1.4 : 1" :space-between="10"
+      :modules="modules" :slides-per-view="1" :space-between="8"
       :scrollbar="{ draggable: true }"
     >
       <SwiperSlide v-for="courses in boundledCourses" :key="courses">
@@ -89,7 +89,7 @@ onMounted(() => {
           <IonCard
             class="course-card"
             v-for="course in courses.items" :key="course"
-            style="height: 160px; margin-bottom: 25px;  background-image: linear-gradient(to  right, var(--ion-color-tertiary) -70%, #fff 50%  );"
+            style="height: 140px; margin-bottom: 25px;  background-image: linear-gradient(to  right, var(--ion-color-tertiary) -70%, #fff 50%  );"
             @click="emits('update:modelValue', course)"
           >
             <IonCardHeader>
@@ -112,6 +112,7 @@ onMounted(() => {
 <style>
 
 .course-card{
+  padding: 10px;
   cursor: pointer; 
   transition: background-color 0.3s ease, transform 0.3s ease;
 }
