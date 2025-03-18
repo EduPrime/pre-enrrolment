@@ -64,17 +64,18 @@ onMounted(async () => {
       :space-between="20" :scrollbar="{ draggable: true }"
     >
       <SwiperSlide v-for="school in schoolList" :key="school.id" @click="emits('update:modelValue', school)">
-        <IonCard class="school-card" style="min-height: 100%;" :style="schoolList?.length === 1 ? '' : 'width: 100%;'">
+        <IonCard class="school-card" style="min-height: 100%; width: 100%; margin-bottom: 10%;">
           <IonCardHeader class="ion-padding-top">
             <IonCardTitle style="font-size: 1.2rem; line-height: 110%;">
               {{ school.name }}
             </IonCardTitle>
-            <IonCardSubtitle>{{ school.address }}, {{ school.city }} - {{ school.state }}</IonCardSubtitle>
+            <IonCardSubtitle>{{ school.address }}</IonCardSubtitle>
+            <IonCardSubtitle>{{ school.city }} - {{ school.state }}</IonCardSubtitle>
           </IonCardHeader>
 
-          <IonCardContent>
+          <IonCardContent style="padding-left: 0px; padding-top: 10%;">
             <IonItem>
-              <IonText color="primary" class="flex" style="width: 100%">
+              <IonText color="white" class="flex" style="width: 100%">
                 Telefone:
                 <span class="ml-auto">
                   {{ school.phone }}
@@ -82,9 +83,9 @@ onMounted(async () => {
               </IonText>
             </IonItem>
 
-            <IonItem>
+            <!--<IonItem>
               <div>
-                <IonText color="primary" class="flex" style="width: 100%">
+                <IonText color="white" class="flex" style="width: 100%">
                   <p v-if="school.open">
                     Matriculas abertas
                   </p>
@@ -97,7 +98,7 @@ onMounted(async () => {
                 style="height: 16px; width: 16px; border-radius: 100%; margin-left: auto"
                 :style="school.open ? ' background-color:chartreuse;' : ' background-color: orange;'"
               />
-            </IonItem>
+            </IonItem>-->
           </IonCardContent>
         </IonCard>
       </SwiperSlide>
@@ -108,12 +109,13 @@ onMounted(async () => {
 <style>
 
 .school-card{
+  height: 200px;
   cursor: pointer; 
   transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .school-card:hover {
-  background-color: #f0f0f0; 
+  background-color: #71438d; 
   transform: scale(1.02); 
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
 }

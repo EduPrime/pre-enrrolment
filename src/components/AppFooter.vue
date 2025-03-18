@@ -27,14 +27,14 @@ onMounted(() => {
           style="background-color: white ; border-radius: 100%; max-width: 120px;" alt=""
         >
         <div style="margin-left: auto; margin-top: auto; margin-bottom: auto;">
-          <IonButton color="light">
-            <IonIcon :icon="logoInstagram" />
+          <IonButton color="light" href="https://www.instagram.com/prefeituraararipina?igsh=MTNyd3RndTVybGxwcA==" target="_blank">
+            <IonIcon :icon="logoInstagram"/>
           </IonButton>
-          <IonButton color="light">
-            <IonIcon :icon="logoFacebook" />
+          <IonButton color="light" href="https://www.facebook.com/profile.php?id=100064317084683&mibextid=wwXIfr&mibextid=wwXIfr" target="_blank">
+            <IonIcon :icon="logoFacebook"/>
           </IonButton>
-          <IonButton color="light">
-            <IonIcon :icon="globeOutline" />
+          <IonButton color="light" href="https://araripina.pe.gov.br/secretarias-servicos/secretaria-de-educacao/" target="_blank">
+            <IonIcon :icon="globeOutline"/>
           </IonButton>
         </div>
       </div>
@@ -55,7 +55,7 @@ onMounted(() => {
         </IonText>
       </IonCardTitle>
       <div class="ion-padding-top">
-        <IonButton href="tel:+550000000000" color="light" size="large" class="ion-padding-end">
+        <!--<IonButton href="tel:+550000000000" color="light" size="large" class="ion-padding-end">
           <IonIcon :icon="callOutline" />
         </IonButton>
         <IonButton
@@ -63,10 +63,12 @@ onMounted(() => {
           class="ion-padding-end"
         >
           <IonIcon :icon="logoWhatsapp" />
-        </IonButton>
-        <IonButton href="mailto:fale@softagon.com.br" color="light" size="large" class="ion-padding-end">
-          <IonIcon :icon="mailOutline" />
-        </IonButton>
+        </IonButton>-->
+        <a href="mailto:rachel.cantarelli@araripina.pe.gov.br">
+          <IonButton color="light" size="large" class="ion-padding-end">
+            <IonIcon :icon="mailOutline" />
+          </IonButton>
+        </a>
       </div>
     </div>
   </div>
