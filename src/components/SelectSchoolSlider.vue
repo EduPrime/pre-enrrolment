@@ -69,10 +69,11 @@ onMounted(async () => {
             <IonCardTitle style="font-size: 1.2rem; line-height: 110%;">
               {{ school.name }}
             </IonCardTitle>
-            <IonCardSubtitle>{{ school.address }}, {{ school.city }} - {{ school.state }}</IonCardSubtitle>
+            <IonCardSubtitle>{{ school.address }}</IonCardSubtitle>
+            <IonCardSubtitle>{{ school.city }} - {{ school.state }}</IonCardSubtitle>
           </IonCardHeader>
 
-          <IonCardContent>
+          <IonCardContent style="padding-left: 0px; padding-top: 10%;">
             <IonItem>
               <IonText color="white" class="flex" style="width: 100%">
                 Telefone:
@@ -82,7 +83,7 @@ onMounted(async () => {
               </IonText>
             </IonItem>
 
-            <IonItem>
+            <!--<IonItem>
               <div>
                 <IonText color="white" class="flex" style="width: 100%">
                   <p v-if="school.open">
@@ -97,7 +98,7 @@ onMounted(async () => {
                 style="height: 16px; width: 16px; border-radius: 100%; margin-left: auto"
                 :style="school.open ? ' background-color:chartreuse;' : ' background-color: orange;'"
               />
-            </IonItem>
+            </IonItem>-->
           </IonCardContent>
         </IonCard>
       </SwiperSlide>

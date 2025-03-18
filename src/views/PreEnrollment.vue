@@ -67,7 +67,7 @@ onMounted(async () => {
                     </IonText>
                   </IonCol>
                   <IonCol size="12">
-                    <remainingTime t-date="2025-02-28T23:59:59" />
+                    <remainingTime t-date="2025-06-30T23:59:59" />
                   </IonCol>
                   <IonCol size="12">
                     <IonText color="primary">

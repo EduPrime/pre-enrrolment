@@ -44,7 +44,7 @@ const pageWidth = ref()
 function groupCourses(courses: any[]): any[] {
   const boundled = []
   for (let i = 0; i < courses.length; i += 2) {
-    boundled.push({ items: courses.slice(i, i + 2) })
+    boundled.push([ courses[i], courses[i+1] ])
   }
   return boundled
 }
@@ -84,16 +84,16 @@ onMounted(() => {
       :modules="modules" :slides-per-view="1" :space-between="8"
       :scrollbar="{ draggable: true }"
     >
-      <SwiperSlide v-for="courses in boundledCourses" :key="courses">
-        <div>
+      <SwiperSlide v-for="(group, index) in boundledCourses" :key="index">
+        <div class="course-container">
           <IonCard
             class="course-card"
-            v-for="course in courses.items" :key="course"
-            style="height: 140px; margin-bottom: 25px;  background-image: linear-gradient(to  right, var(--ion-color-tertiary) -70%, #fff 50%  );"
+            v-for="course in group" :key="course.id"
+            style="height: 140px; margin-bottom: 25px; width: 500px; background-image: linear-gradient(to  right, var(--ion-color-tertiary) -70%, #fff 50%  );"
             @click="emits('update:modelValue', course)"
           >
             <IonCardHeader>
-              <IonCardTitle color="primary">
+              <IonCardTitle color="primary" style="font-size: 25px;">
                 {{ course.name }}
               </IonCardTitle>
             </IonCardHeader>
@@ -111,7 +111,18 @@ onMounted(() => {
 
 <style>
 
+.course-container{
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  width: 100%;
+  justify-content: space-between;
+}
 .course-card{
+  display: flex;
+  text-align: center;
+  align-items: center;
+  flex-direction: column;
   padding: 10px;
   cursor: pointer; 
   transition: background-color 0.3s ease, transform 0.3s ease;

@@ -58,12 +58,12 @@ watch(result, (value) => {
               style="display: block; object-fit: contain; margin-top: auto; margin-bottom: auto;">
             <IonCardHeader class="ion-padding-top" style="padding-top: 22px; padding-bottom: 8px;">
               <IonCardTitle>
-                <IonText style="color: white; font-size: 22px;">
+                <IonText color="white" style="font-size: 22px;">
                   {{ student.student }}
                 </IonText>
               </IonCardTitle>
               <IonCardSubtitle>
-                <IonText style="color: white; font-size: 14px">
+                <IonText color="white" style="font-size: 14px">
                   Pré-Matrícula:
                   <b class="ion-text-uppercase">
                     {{ student.preenrollmentcode }}
@@ -75,8 +75,8 @@ watch(result, (value) => {
           <IonCardContent>
             <IonItem>
               <div>
-                <IonText>
-                  <p style="color: white; font-size: 16px;">
+                <IonText color="white">
+                  <p style="font-size: 16px;">
                     {{ student.school.name }}
                   </p>
                 </IonText>
@@ -85,7 +85,7 @@ watch(result, (value) => {
             <IonItem>
               <div>
                 <IonText color="white">
-                  <p style="color: white; font-size: 16px;">
+                  <p style="font-size: 16px;">
                     {{ student.course.name }}
                   </p>
                 </IonText>
@@ -94,12 +94,12 @@ watch(result, (value) => {
             <IonItem style="align-items: center;">
               <div>
                 <IonText color="white">
-                  <p style="color: white; font-size: 16px;">Situação da matrícula</p>
+                  <p style="font-size: 16px;">Situação da matrícula</p>
                 </IonText>
               </div>
               <span style="display: flex; align-items: center; margin-left: auto;">
                 <IonCardSubtitle class="ion-padding-end">
-                  <IonText style="color: white; font-size: 14px;">
+                  <IonText color="white" style="font-size: 14px;">
                     {{ student.situation === 'PENDENTE' ? 'Em Análise' : 'Finalizado' }}
                   </IonText>
                 </IonCardSubtitle>
@@ -120,17 +120,18 @@ watch(result, (value) => {
   <div v-if="result && result.length === 0">
     <IonCard style="width: 100%; margin-left: 0%; padding: 20px;">
       <IonCardHeader>
-        <IonCardTitle style="color: white; font-size: 22px">Nenhum cadastro encontrado</IonCardTitle>
-        <IonCardSubtitle style="color: white; font-size: 18px;">Não foi possível encontrar cadastro {{ props.query ? `${props.query}` : '' }}</IonCardSubtitle>
+        <IonCardTitle color="white" style="font-size: 22px">Nenhum cadastro encontrado</IonCardTitle>
+        <IonCardSubtitle color="white" style="font-size: 18px;">Não foi possível encontrar cadastro {{ props.query ? `${props.query}` : '' }}</IonCardSubtitle>
       </IonCardHeader>
 
-      <IonCardContent style="color: white; font-size: 14px;"> Verifique se o código foi digitado corretamente ou selecione uma das opções abaixo
+      <IonCardContent color="white" style="font-size: 14px;"> Verifique se o código foi digitado corretamente ou selecione uma das opções abaixo
       </IonCardContent>
     </IonCard>
   </div>
 </template>
 
 <style scoped>
+
 .swiper-container {
   position: relative;
   padding: 5px 0; 

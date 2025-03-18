@@ -47,15 +47,14 @@ function groupCourses(courses: any[]): any[] {
 
   const boundled = []
   for (let i = 0; i < sortedCourses.length; i += 2) {
-    boundled.push({ items: sortedCourses.slice(i, i + 2) })
+    boundled.push({ items: [sortedCourses[i], sortedCourses[i+1]] } )
   }
   return boundled
 }
 
 onMounted(async () => {
   gSeries.value = await postgrest.getSeries(props.course)
-  boundledSeries.value = groupCourses(gSeries.value)
-  console.log('boundledSeries:', boundledSeries.value)
+  
 })
 </script>
 
@@ -64,27 +63,28 @@ onMounted(async () => {
         @slideChange="onSlideChange" -->
   <div :style="pageWidth?.pageWidth > 992 ? 'max-width: 992px' : 'width: 100vw;'">
     <Swiper
-      :modules="modules" :slides-per-view="pageWidth?.pageWidth >= 992 ? 2 : 1" :space-between="8"
+      :modules="modules" :slides-per-view="1" :space-between="10"
       :scrollbar="{ draggable: true }"
     >
-      <SwiperSlide v-for="series in boundledSeries" :key="series">
-        <div>
-          <IonCard
-            class="series-card"
-            v-for="serie in series.items" :key="serie"
-            style="height: 140px; margin-bottom: 25px; background-image: linear-gradient(to  right, var(--ion-color-tertiary) -50%, #fff 60%  );"
-            @click="emits('update:modelValue', serie)"
-          >
-            <IonCardHeader>
-              <div class="flex" style="height: 90px;">
-                <span class="my-auto mx-auto" style="font-size: 22pt;">
-                  <IonText color="primary">
-                    {{ serie.name }}
-                  </IonText>
-                </span>
-              </div>
-            </IonCardHeader>
-          </IonCard>
+      <SwiperSlide>
+        <div class="grid-container">
+          <div class="grid-item" v-for="serie in gSeries || []" :key="serie.id">
+            <IonCard
+              class="series-card"
+              style="height: 140px; margin-bottom: 25px; width: 100%; background-image: linear-gradient(to  right, var(--ion-color-tertiary) -50%, #fff 60%  );"
+              @click="emits('update:modelValue', serie)"
+            >
+              <IonCardHeader>
+                <div class="flex" style="height: 90px;">
+                  <span class="my-auto mx-auto" style="font-size: 32px;">
+                    <IonText color="primary">
+                      {{ serie.name }}
+                    </IonText>
+                  </span>
+                </div>
+              </IonCardHeader>
+            </IonCard>
+          </div>
         </div>
       </SwiperSlide>
     </Swiper>
@@ -93,7 +93,25 @@ onMounted(async () => {
 
 <style>
 
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 1fr 1fr;
+  gap: 10px;
+  width: 100%;
+}
+
+.grid-item{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .series-card{
+  display: flex;
+  text-align: center;
+  align-items: center;
+  flex-direction: column;
   padding: 10px;
   cursor: pointer; 
   transition: background-color 0.3s ease, transform 0.3s ease;

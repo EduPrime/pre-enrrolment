@@ -64,9 +64,11 @@ onMounted(() => {
         >
           <IonIcon :icon="logoWhatsapp" />
         </IonButton>-->
-        <IonButton href="rachel.cantarelli@araripina.pe.gov.br" color="light" size="large" class="ion-padding-end">
-          <IonIcon :icon="mailOutline" />
-        </IonButton>
+        <a href="mailto:rachel.cantarelli@araripina.pe.gov.br">
+          <IonButton color="light" size="large" class="ion-padding-end">
+            <IonIcon :icon="mailOutline" />
+          </IonButton>
+        </a>
       </div>
     </div>
   </div>

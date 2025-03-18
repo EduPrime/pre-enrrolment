@@ -498,7 +498,7 @@ const handleFileChange = async (event: Event) => {
             <Field v-slot="{ field }" name="Deficiência">
             <IonSelect v-bind="field" v-model="student.disability" label="Deficiência" label-placement="floating" multiple>
               <IonSelectOption v-for="disability in disabilities" :key="disability" :value="disability">
-                {{ disability.toUpperCase().replaceAll('_', ' ') }}
+                {{ disability.toLowerCase().replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase()) }}
               </IonSelectOption>
             </IonSelect>
           </Field>
