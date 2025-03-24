@@ -86,7 +86,7 @@ watch(result, (value) => {
               <div>
                 <IonText color="white">
                   <p style="font-size: 16px;">
-                    {{ student.course.name }}
+                    {{ student.course.name }} - {{ student.series.name }}
                   </p>
                 </IonText>
               </div>
@@ -100,10 +100,10 @@ watch(result, (value) => {
               <span style="display: flex; align-items: center; margin-left: auto;">
                 <IonCardSubtitle class="ion-padding-end">
                   <IonText color="white" style="font-size: 14px;">
-                    {{ student.situation === 'PENDENTE' ? 'Em Análise' : 'Finalizado' }}
+                    {{ student.situation === 'PENDENTE' ? 'Em Análise' : 'Concluído' }}
                   </IonText>
                 </IonCardSubtitle>
-                <div :style="student.situation === 'PENDENTE' ? 'background-color: orange' : 'background-color: gray'"
+                <div :style="student.situation === 'PENDENTE' ? 'background-color: orange' : 'background-color: green'"
                   style="height: 16px; width: 16px; border-radius: 100%; margin-bottom: 2px;" />
               </span>
             </IonItem>

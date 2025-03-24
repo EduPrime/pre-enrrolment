@@ -16,6 +16,8 @@ import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 import 'swiper/css/scrollbar'
 
+import IMask from 'imask'
+
 // const onSwiper = (swiper) => {
 //   console.log(swiper);
 // };
@@ -36,6 +38,12 @@ const modules = [Navigation, Pagination, Scrollbar, A11y]
 const pageWidth = ref()
 const postgrest = new SchoolService()
 const schoolList = ref()
+
+const maskPhone = (value: string) => {
+  return IMask.pipe(value, {
+    mask: '(00) 00000-0000',
+  })
+}
 
 watch(() => props.query, async (qValue: string) => {
   console.log('entrou aqui', qValue)
@@ -78,7 +86,7 @@ onMounted(async () => {
               <IonText color="white" class="flex" style="width: 100%">
                 Telefone:
                 <span class="ml-auto">
-                  {{ school.phone }}
+                  {{ maskPhone(school.phone) }}
                 </span>
               </IonText>
             </IonItem>
