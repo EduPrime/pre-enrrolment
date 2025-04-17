@@ -122,6 +122,25 @@ model Course {
 
   @@map("course")
   @@schema("public")
+  CourseSchool CourseSchool[] @relation(map: "course_school_course_id_fkey")
+}
+
+model CourseSchool {
+  id          String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  courseId    String    @db.Uuid
+  schoolId    String    @db.Uuid
+  createdAt   DateTime  @default(now()) @db.Timestamp(6)
+  deletedAt   DateTime? @db.Timestamp(6)
+  updatedAt   DateTime? @db.Timestamp(6)
+  updatedBy   String?   @db.Uuid
+  tenantId    String?
+  userCreated String?   @db.VarChar(255)
+
+  course     Course    @relation(fields: [courseId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "course_school_course_id_fkey")
+  school     School    @relation(fields: [schoolId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "course_school_school_id_fkey")
+
+  @@map("courseSchool")
+  @@schema("public")
 }
 
 model Discipline {
@@ -606,6 +625,7 @@ model School {
 
   @@map("school")
   @@schema("public")
+  CourseSchool CourseSchool[] @relation(map: "course_school_school_id_fkey")
 }
 
 model SchoolSettings {

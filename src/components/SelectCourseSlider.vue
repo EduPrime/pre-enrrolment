@@ -7,7 +7,7 @@ import { A11y, Navigation, Pagination, Scrollbar } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { onMounted, ref, watch } from 'vue'
 
-import CourseService from '../services/CourseService'
+import CourseSchoolService from '../services/CourseSchoolService'
 
 // Import Swiper styles
 import 'swiper/css'
@@ -19,14 +19,6 @@ const props = defineProps<Props>()
 
 const emits = defineEmits(['update:modelValue'])
 
-// const onSwiper = (swiper: any) => {
-//     console.log(swiper);
-// };
-
-// const onSlideChange = () => {
-//     console.log('slide change');
-// };
-
 const modules = [Navigation, Pagination, Scrollbar, A11y]
 
 //
@@ -35,7 +27,7 @@ interface Props {
   school: any
 }
 
-const postgrest = new CourseService()
+const postgrest = new CourseSchoolService()
 
 const courseList = ref()
 const boundledCourses = ref()
@@ -51,14 +43,7 @@ function groupCourses(courses: any[]): any[] {
 
 watch(() => props.school, async (value) => {
   if (value) {
-    // console.log('props.school:', value)
-
-    const allCourses = await postgrest.getCoursesBySchoolId(props.school)
-    courseList.value = allCourses?.filter(course => course.name !== 'Maternal')
-
-    console.log('courseList.value', courseList.value)
-
-    // console.log('courseList atualizado:', courseList.value)
+    courseList.value = await postgrest.getCoursesBySchoolId(props.school)
   }
 }, { immediate: true })
 
@@ -66,9 +51,6 @@ watch(() => courseList.value, (nV) => {
   if (Array.isArray(nV) && nV.length > 0) {
     boundledCourses.value = groupCourses(nV)
   }
-  // else {
-  //   console.log('courseList não é um array ou está vazio:', nV)
-  // }
 })
 
 onMounted(() => {
@@ -78,8 +60,6 @@ onMounted(() => {
 
 <template>
   <div :style="pageWidth?.pageWidth > 992 ? 'max-width: 992px' : 'width: 100vw;'">
-    <!-- @swiper="onSwiper"
-   @slideChange="onSlideChange" -->
     <Swiper
       :modules="modules" :slides-per-view="1" :space-between="8"
       :scrollbar="{ draggable: true }"
@@ -132,38 +112,3 @@ onMounted(() => {
   transform: scale(1.02);  
 }
 </style>
-
-<!-- <script>
-      // import Swiper core and required modules
-      import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
-
-      // Import Swiper Vue.js components
-      import { Swiper, SwiperSlide } from 'swiper/vue';
-
-      // Import Swiper styles
-      import 'swiper/css';
-      import 'swiper/css/navigation';
-      import 'swiper/css/pagination';
-      import 'swiper/css/scrollbar';
-
-      // Import Swiper styles
-      export default {
-        components: {
-          Swiper,
-          SwiperSlide,
-        },
-        setup() {
-          const onSwiper = (swiper) => {
-            console.log(swiper);
-          };
-          const onSlideChange = () => {
-            console.log('slide change');
-          };
-          return {
-            onSwiper,
-            onSlideChange,
-            modules: [Navigation, Pagination, Scrollbar, A11y],
-          };
-        },
-      };
-    </script> -->
