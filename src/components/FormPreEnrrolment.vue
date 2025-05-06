@@ -221,22 +221,22 @@ onMounted(async () => {
   studentList.value = await studentService.getStudents()
 })
 const disabilities = [
-  'TRANSTORNO_DO_ESPECTRO_AUTISTA',
-  'TRANSTORNO_DESINTEGRATIVO_DA_INFANCIA_PSICOSE_INFANTIL',
-  'TDAH',
-  'SINDROME_DE_RETT',
-  'SINDROME_DE_ASPERGER',
-  'SURDOCEGUEIRA',
-  'SURDEZ',
-  'DEFICIENCIA_MULTIPLA',
-  'DEFICIENCIA_MENTAL',
-  'DEFICIENCIA_INTELECTUAL',
-  'DEFICIENCIA_FISICA',
-  'DEFICIENCIA_AUDITIVA',
-  'CEGUEIRA',
-  'BAIXA_VISAO',
-  'AUTISMO_CLASSICO',
-  'ALTAS_HABILIDADES_SUPERDOTACAO',
+  "Transtorno do Espectro Autista",
+ "Transtorno desintegrativo da infância - psicose infantil",
+  "TDAH",
+  "Síndrome de Rett",
+  "Síndrome de Asperger",
+  "Surdocegueira",
+  "Surdez",
+  "Deficiência múltipla",
+  "Deficiência mental",
+  "Deficiência intelectual",
+  "Deficiência física",
+  "Deficiência auditiva",
+  "Cegueira",
+  "Baixa visão",
+  "Autismo clássico",
+  "Altas habilidades/superdotação"
 ]
 const handleFileChange = async (event: Event) => {
   const target = event.target as HTMLInputElement
@@ -498,7 +498,7 @@ const handleFileChange = async (event: Event) => {
             <Field v-slot="{ field }" name="Deficiência">
             <IonSelect v-bind="field" v-model="student.disability" label="Deficiência" label-placement="floating" multiple>
               <IonSelectOption v-for="disability in disabilities" :key="disability" :value="disability">
-                {{ disability.toLowerCase().replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase()) }}
+                {{ disability }}
               </IonSelectOption>
             </IonSelect>
           </Field>
